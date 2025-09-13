@@ -22,7 +22,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             width: 100%;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -30,6 +30,16 @@
             padding: 40px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
@@ -38,6 +48,7 @@
             font-size: 2.5em;
             margin-bottom: 40px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            grid-column: span 2;
         }
 
         .buttons-grid {
@@ -120,6 +131,47 @@
         .btn-depression:hover { background: linear-gradient(145deg, #a5d6a7, #c8e6c9); }
         .btn-cholesterol:hover { background: linear-gradient(145deg, #ffcc80, #ffb74d); }
 
+        /* Image Display Area */
+        .image-display {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .organ-image {
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+            transform: scale(0.8) rotate(-10deg);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        .organ-image.active {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .default-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.5em;
+            text-align: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .default-text.hidden {
+            opacity: 0;
+        }
+
         /* Modal styles */
         .modal {
             display: none;
@@ -163,13 +215,15 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
             .buttons-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
-            }
-            
-            .container {
-                padding: 20px;
             }
             
             h1 {
@@ -180,6 +234,15 @@
                 font-size: 16px;
                 padding: 15px 20px;
             }
+
+            .image-display {
+                height: 250px;
+            }
+
+            .organ-image {
+                width: 200px;
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -187,34 +250,121 @@
     <div class="container">
         <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
         
-        <div class="buttons-grid">
-            <button class="button-3d btn-liver" onclick="redirect('k')">
-                🫘 کبد چرب
-            </button>
-            <button class="button-3d btn-pressure" onclick="redirect('f')">
-                💓 فشار خون
-            </button>
+        <div class="left-section">
+            <div class="buttons-grid">
+                <button class="button-3d btn-liver" onclick="redirect('k')" onmouseenter="showImage('liver')" onmouseleave="hideImage()">
+                    🫘 کبد چرب
+                </button>
+                <button class="button-3d btn-pressure" onclick="redirect('f')" onmouseenter="showImage('heart')" onmouseleave="hideImage()">
+                    💖 فشار خون
+                </button>
+                
+                <button class="button-3d btn-sugar" onclick="redirect('g')" onmouseenter="showImage('pancreas')" onmouseleave="hideImage()">
+                    🍯 قند خون
+                </button>
+                <button class="button-3d btn-obesity" onclick="redirect('H')" onmouseenter="showImage('scale')" onmouseleave="hideImage()">
+                    ⚖️ چاقی
+                </button>
+                
+                <button class="button-3d btn-stress" onclick="redirect('r')" onmouseenter="showImage('lungs')" onmouseleave="hideImage()">
+                    😰 ریه 
+                </button>
+                <button class="button-3d btn-insomnia" onclick="redirect('m')" onmouseenter="showImage('stomach')" onmouseleave="hideImage()">
+                    😴 معده
+                </button>
+                
+                <button class="button-3d btn-depression" onclick="redirect('gl')" onmouseenter="showImage('heart2')" onmouseleave="hideImage()">
+                    😔 قلب
+                </button>
+                <button class="button-3d btn-cholesterol" onclick="redirect('hj')" onmouseenter="showImage('blood')" onmouseleave="hideImage()">
+                    🩸 چربی خون
+                </button>
+            </div>
+        </div>
+
+        <div class="image-display">
+            <div class="default-text" id="defaultText">
+                🔍 روی هر دکمه قرار دهید تا تصویر مربوطه را ببینید
+            </div>
             
-            <button class="button-3d btn-sugar" onclick="redirect('g')">
-                🍯 قند خون
-            </button>
-            <button class="button-3d btn-obesity" onclick="redirect('H')">
-                ⚖️ چاقی
-            </button>
-            
-            <button class="button-3d btn-stress" onclick="redirect('r')">
-                😰 ریه 
-            </button>
-            <button class="button-3d btn-insomnia" onclick="redirect('m')">
-                😴 معده
-            </button>
-            
-            <button class="button-3d btn-depression" onclick="redirect('gl')">
-                😔 قلب
-            </button>
-            <button class="button-3d btn-cholesterol" onclick="redirect('hj')">
-                🩸 چربی خون
-            </button>
+            <!-- Liver SVG -->
+            <svg class="organ-image" id="liver" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <path d="M80 120c-20 0-30 20-25 40c5 15 15 25 30 30c20 8 40 5 60 0c25-8 45-20 50-45c3-20-10-35-25-40c-20-8-40-5-60 0c-10 3-20 8-30 15z" fill="#8B4513" stroke="#654321" stroke-width="3"/>
+                <path d="M150 140c15-5 35-8 50-5c20 5 35 20 30 40c-5 20-25 30-45 25c-15-3-30-15-35-30c-5-20 0-30 0-30z" fill="#A0522D" stroke="#654321" stroke-width="3"/>
+                <circle cx="120" cy="150" r="5" fill="#654321"/>
+                <circle cx="180" cy="160" r="4" fill="#654321"/>
+            </svg>
+
+            <!-- Heart SVG -->
+            <svg class="organ-image" id="heart" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <path d="M150,250 C100,200 50,150 50,100 C50,75 75,50 100,50 C125,50 150,75 150,100 C150,75 175,50 200,50 C225,50 250,75 250,100 C250,150 200,200 150,250 Z" fill="#DC143C" stroke="#B22222" stroke-width="4"/>
+                <path d="M120,80 C130,70 140,75 145,85" fill="none" stroke="#FF6B8A" stroke-width="3" opacity="0.7"/>
+                <circle cx="110" cy="90" r="3" fill="#FF6B8A" opacity="0.8"/>
+                <circle cx="190" cy="95" r="2" fill="#FF6B8A" opacity="0.6"/>
+            </svg>
+
+            <!-- Pancreas SVG -->
+            <svg class="organ-image" id="pancreas" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="150" cy="150" rx="100" ry="30" fill="#DEB887" stroke="#CD853F" stroke-width="3"/>
+                <path d="M70,140 Q50,130 60,110 Q80,120 90,130" fill="#F4A460" stroke="#CD853F" stroke-width="2"/>
+                <path d="M200,160 Q250,170 240,190 Q220,180 210,170" fill="#F4A460" stroke="#CD853F" stroke-width="2"/>
+                <circle cx="120" cy="145" r="4" fill="#CD853F"/>
+                <circle cx="180" cy="155" r="3" fill="#CD853F"/>
+                <circle cx="160" cy="140" r="2" fill="#CD853F"/>
+            </svg>
+
+            <!-- Scale SVG -->
+            <svg class="organ-image" id="scale" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <rect x="140" y="50" width="20" height="200" fill="#4682B4" stroke="#2F4F4F" stroke-width="2"/>
+                <ellipse cx="150" cy="60" rx="80" ry="15" fill="#87CEEB" stroke="#4682B4" stroke-width="2"/>
+                <rect x="120" y="240" width="60" height="20" rx="10" fill="#2F4F4F"/>
+                <text x="150" y="140" text-anchor="middle" font-family="Arial" font-size="24" font-weight="bold" fill="#2F4F4F">75</text>
+                <text x="150" y="165" text-anchor="middle" font-family="Arial" font-size="12" fill="#4682B4">KG</text>
+            </svg>
+
+            <!-- Lungs SVG -->
+            <svg class="organ-image" id="lungs" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="150" rx="40" ry="80" fill="#FFB6C1" stroke="#FF69B4" stroke-width="3"/>
+                <ellipse cx="200" cy="150" rx="40" ry="80" fill="#FFB6C1" stroke="#FF69B4" stroke-width="3"/>
+                <path d="M130,90 Q150,80 170,90" fill="none" stroke="#FF1493" stroke-width="4"/>
+                <path d="M140,95 L150,110 L160,95" fill="none" stroke="#FF1493" stroke-width="2"/>
+                <circle cx="85" cy="130" r="8" fill="#FF91A4" opacity="0.7"/>
+                <circle cx="215" cy="140" r="6" fill="#FF91A4" opacity="0.7"/>
+                <circle cx="100" cy="180" r="5" fill="#FF91A4" opacity="0.5"/>
+                <circle cx="200" cy="170" r="7" fill="#FF91A4" opacity="0.6"/>
+            </svg>
+
+            <!-- Stomach SVG -->
+            <svg class="organ-image" id="stomach" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <path d="M120,80 Q100,60 80,80 Q70,120 80,160 Q90,220 130,240 Q170,250 200,220 Q220,180 210,140 Q200,100 180,90 Q160,85 150,95 Q140,85 120,80 Z" fill="#DDA0DD" stroke="#9370DB" stroke-width="3"/>
+                <path d="M140,100 Q120,90 110,110" fill="none" stroke="#BA55D3" stroke-width="2"/>
+                <ellipse cx="150" cy="160" rx="30" ry="20" fill="#E6E6FA" opacity="0.6"/>
+                <circle cx="130" cy="140" r="4" fill="#9370DB"/>
+                <circle cx="170" cy="180" r="3" fill="#9370DB"/>
+            </svg>
+
+            <!-- Heart2 SVG (different style) -->
+            <svg class="organ-image" id="heart2" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <path d="M150,250 C100,200 50,150 50,100 C50,75 75,50 100,50 C125,50 150,75 150,100 C150,75 175,50 200,50 C225,50 250,75 250,100 C250,150 200,200 150,250 Z" fill="#FF1493" stroke="#DC143C" stroke-width="4"/>
+                <path d="M150,100 L150,220" stroke="#FFB6C1" stroke-width="3"/>
+                <path d="M100,120 Q150,140 200,120" fill="none" stroke="#FFB6C1" stroke-width="2"/>
+                <circle cx="120" cy="110" r="6" fill="#FF69B4" opacity="0.8"/>
+                <circle cx="180" cy="115" r="5" fill="#FF69B4" opacity="0.7"/>
+            </svg>
+
+            <!-- Blood SVG -->
+            <svg class="organ-image" id="blood" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="150" cy="150" r="80" fill="none" stroke="#DC143C" stroke-width="6"/>
+                <circle cx="120" cy="120" r="12" fill="#FF0000"/>
+                <circle cx="180" cy="140" r="10" fill="#FF4500"/>
+                <circle cx="160" cy="180" r="14" fill="#FF0000"/>
+                <circle cx="130" cy="170" r="8" fill="#FF6347"/>
+                <circle cx="200" cy="180" r="11" fill="#FF0000"/>
+                <circle cx="100" cy="160" r="9" fill="#FF4500"/>
+                <circle cx="170" cy="120" r="7" fill="#FF6347"/>
+                <path d="M80,100 Q150,50 220,100" fill="none" stroke="#FF0000" stroke-width="3"/>
+                <path d="M80,200 Q150,250 220,200" fill="none" stroke="#FF0000" stroke-width="3"/>
+            </svg>
         </div>
     </div>
 
@@ -231,10 +381,36 @@
     <script>
         // Hidden path functionality
         let specialContentShown = false;
+        let currentActiveImage = null;
 
         function redirect(type) {
             // Create the path based on button type
             window.location.href = type + '.html';
+        }
+
+        function showImage(imageId) {
+            // Hide default text
+            document.getElementById('defaultText').classList.add('hidden');
+            
+            // Hide current active image
+            if (currentActiveImage) {
+                document.getElementById(currentActiveImage).classList.remove('active');
+            }
+            
+            // Show new image
+            currentActiveImage = imageId;
+            document.getElementById(imageId).classList.add('active');
+        }
+
+        function hideImage() {
+            // Show default text
+            document.getElementById('defaultText').classList.remove('hidden');
+            
+            // Hide current active image
+            if (currentActiveImage) {
+                document.getElementById(currentActiveImage).classList.remove('active');
+                currentActiveImage = null;
+            }
         }
 
         // Check for special file on page load
