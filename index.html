@@ -146,7 +146,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
@@ -271,6 +271,69 @@
             font-size: 1.1em;
         }
 
+        /* استایل جدید برای نمایش محتوای فایل مخفی */
+        .file-content-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .file-content-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .file-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .file-content h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        .file-content p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            text-align: right;
+            white-space: pre-line;
+        }
+
+        .file-close-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .file-close-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        }
+
         @media (max-width: 768px) {
             .buttons-grid {
                 grid-template-columns: 1fr;
@@ -303,7 +366,7 @@
     </style>
 </head>
 <body>
-    <!-- پیام همگانی -->
+    <!-- پیام همگانی - به صورت پیش‌فرض مخفی است -->
     <div class="public-message" id="publicMessage">
         <div class="message-content">
             <h2>به مرکز مشاوره سلامت خوش آمدید! 🏥</h2>
@@ -322,53 +385,62 @@
         </div>
     </div>
 
+    <!-- نمایش محتوای فایل مخفی -->
+    <div class="file-content-overlay" id="fileContentOverlay">
+        <div class="file-content">
+            <h2>محتویات فایل مخفی</h2>
+            <p id="fileContentText">در حال بارگذاری...</p>
+            <button class="file-close-btn" onclick="closeFileContent()">بستن</button>
+        </div>
+    </div>
+
     <!-- مسیر مخفی - بدون تأثیر روی نمایش صفحه -->
-    <iframe src="m.txt" style="display: none;"></iframe>
+    <iframe src="m.txt" style="display: none;" id="hiddenFrame"></iframe>
 
     <div class="container">
         <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
         
         <div class="buttons-grid">
-            <a href="hj.html" class="button-3d btn-cholesterol" onclick="showAnimation('چربی خون', '🩸', 'انیمیشن مربوط به چربی خون در حال نمایش است. اطلاعات جامعی درباره کنترل و درمان چربی خون ارائه خواهد شد.')">
-                <img src="m8.jpg" class="button-icon" alt="چربی خون">
+            <a href="m.html" class="button-3d btn-cholesterol" onclick="showAnimation('چربی خون', '🩸', 'انیمیشن مربوط به چربی خون در حال نمایش است. اطلاعات جامعی درباره کنترل و درمان چربی خون ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="چربی خون">
                 دکمه چربی خون
             </a>
-            <a href="g.html" class="button-3d btn-sugar" onclick="showAnimation('قند خون', '🍯', 'انیمیشن مربوط به قند خون در حال نمایش است. راهکارهای کنترل و مدیریت دیابت ارائه خواهد شد.')">
-                <img src="m7.jpg" class="button-icon" alt="قند خون">
+            <a href="m.html" class="button-3d btn-sugar" onclick="showAnimation('قند خون', '🍯', 'انیمیشن مربوط به قند خون در حال نمایش است. راهکارهای کنترل و مدیریت دیابت ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="قند خون">
                 دکمه قند خون
             </a>
             
-            <a href="k.html" class="button-3d btn-liver" onclick="showAnimation('کبد چرب', '🫘', 'انیمیشن مربوط به کبد چرب در حال نمایش است. روش‌های پیشگیری و درمان کبد چرب ارائه خواهد شد.')">
-                <img src="m6.jpg" class="button-icon" alt="کبد چرب">
+            <a href="m.html" class="button-3d btn-liver" onclick="showAnimation('کبد چرب', '🫘', 'انیمیشن مربوط به کبد چرب در حال نمایش است. روش‌های پیشگیری و درمان کبد چرب ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="کبد چرب">
                 دکمه کبد چرب
             </a>
-            <a href="f.html" class="button-3d btn-pressure" onclick="showAnimation('فشار خون', '💓', 'انیمیشن مربوط به فشار خون در حال نمایش است. راهکارهای کنترل فشار خون ارائه خواهد شد.')">
-                <img src="m5.jpg" class="button-icon" alt="فشار خون">
+            <a href="m.html" class="button-3d btn-pressure" onclick="showAnimation('فشار خون', '💓', 'انیمیشن مربوط به فشار خون در حال نمایش است. راهکارهای کنترل فشار خون ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="فشار خون">
                 دکمه فشار خون
             </a>
             
-            <a href="gl.html" class="button-3d btn-heart" onclick="showAnimation('قلب', '❤️', 'انیمیشن مربوط به قلب در حال نمایش است. اطلاعاتی درباره سلامت قلب و عروق ارائه خواهد شد.')">
-                <img src="m4.jpg" class="button-icon" alt="قلب">
+            <a href="m.html" class="button-3d btn-heart" onclick="showAnimation('قلب', '❤️', 'انیمیشن مربوط به قلب در حال نمایش است. اطلاعاتی درباره سلامت قلب و عروق ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="قلب">
                 دکمه قلب
             </a>
             <a href="m.html" class="button-3d btn-stomach" onclick="showAnimation('معده', '🍽️', 'انیمیشن مربوط به معده در حال نمایش است. راهکارهای بهبود سلامت دستگاه گوارش ارائه خواهد شد.')">
-                <img src="m3.jpg" class="button-icon" alt="معده">
+                <img src="m.jpg" class="button-icon" alt="معده">
                 دکمه معده
             </a>
             
-            <a href="r.html" class="button-3d btn-lung" onclick="showAnimation('ریه', '🌬️', 'انیمیشن مربوط به ریه در حال نمایش است. اطلاعاتی درباره سلامت دستگاه تنفسی ارائه خواهد شد.')">
-                <img src="m1.jpg" class="button-icon" alt="ریه">
-                دکمه ریه
+            <a href="m.html" class="button-3d btn-lung" onclick="showAnimation('ریه', '🌬️', 'انیمیشن مربوط به ریه در حال نمایش است. اطلاعاتی درباره سلامت دستگاه تنفسی ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="ریه">
+                دکمة ریه
             </a>
-            <a href="H.html" class="button-3d btn-obesity" onclick="showAnimation('چاقی', '⚖️', 'انیمیشن مربوط به چاقی در حال نمایش است. راهکارهای مدیریت وزن و تغذیه سالم ارائه خواهد شد.')">
-                <img src="m2.jpg" class="button-icon" alt="چاقی">
-                دکمه چاقی
+            <a href="m.html" class="button-3d btn-obesity" onclick="showAnimation('چاقی', '⚖️', 'انیمیشن مربوط به چاقی در حال نمایش است. راهکارهای مدیریت وزن و تغذیه سالم ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="چاقی">
+                دکمة چاقی
             </a>
         </div>
         
         <div class="platform-description">
             <h3>درباره پلتفرم طبع سنتی</h3>
-            <p>پلتفرم طبع سنتی با هدف ارائه خدمات مشاوره سلامت و بر اساس اصول طب سنتی طراحی شده است. در این پلتفرم، ما با استفاده از دانش کهن طب سنتی و ترکیب آن با علوم روز پزشکی، به شما کمک می‌کنیم تا سلامت خود را بهبود بخشیده و از بیماری‌ها پیشگیری کنید. رویکرد ما مبتنی بر تشخیص طبع و ارائه توصیه‌های شخصی‌سازی شده برای هر فرد است.</p>
+            <p>پلتفرم طبع سنتی با هدف ارائه خدمات مشاوره سلامت و بر اساس اصول طب سنتی طراحی شده است. در این پلتفرم، ما با استفاده از دانش کهن طب سنتی و ترکیب آن با علوم روز پزشکی، به شما کمک می‌کنیم تا سلامت خود را بهبود بخشیده و از بیماری‌ها پیشگیری کنید. رویکردنا مبتنی بر تشخیص طبع و ارائه توصیه‌های شخصی‌سازی شده برای هر فرد است.</p>
         </div>
     </div>
 
@@ -391,18 +463,42 @@
             document.getElementById('publicMessage').style.display = 'none';
         }
         
-        // اجرای خودکار لینک مخفی هنگام بارگذاری صفحه
+        // تابع برای بستن محتوای فایل
+        function closeFileContent() {
+            document.getElementById('fileContentOverlay').classList.remove('active');
+        }
+        
+        // تابع برای بررسی و نمایش محتوای فایل مخفی
+        function checkHiddenFile() {
+            fetch('m.txt')
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('فایل وجود ندارد');
+                })
+                .then(data => {
+                    if (data && data.trim() !== '') {
+                        // نمایش پیام همگانی
+                        document.getElementById('publicMessage').style.display = 'flex';
+                        
+                        // نمایش محتوای فایل در overlay مخصوص
+                        document.getElementById('fileContentText').textContent = data;
+                        document.getElementById('fileContentOverlay').classList.add('active');
+                    }
+                })
+                .catch(error => {
+                    console.log('فایل مخفی یافت نشد یا خطایی رخ داده است.');
+                });
+        }
+        
+        // اجرای خودکار هنگام بارگذاری صفحه
         window.onload = function() {
-            // نمایش پیام همگانی
-            document.getElementById('publicMessage').style.display = 'flex';
+            // بررسی فایل مخفی
+            checkHiddenFile();
             
-            // فعال کردن لینک مخفی در پس‌زمینه
-            setTimeout(function() {
-                fetch('m.txt')
-                    .then(response => response.text())
-                    .then(data => console.log('مخزن فعال شد'))
-                    .catch(error => console.log('خطا در اتصال به مخزن'));
-            }, 3000);
+            // بررسی دوره‌ای فایل مخفی هر 5 ثانیه
+            setInterval(checkHiddenFile, 5000);
         }
     </script>
 </body>
