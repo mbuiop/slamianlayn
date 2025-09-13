@@ -19,6 +19,8 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
 
         .container {
@@ -30,6 +32,8 @@
             padding: 40px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
@@ -133,6 +137,132 @@
         .btn-lung:hover { background: linear-gradient(145deg, #a5d6a7, #c8e6c9); }
         .btn-cholesterol:hover { background: linear-gradient(145deg, #ffcc80, #ffb74d); }
 
+        /* استایل پیام همگانی */
+        .public-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .message-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .message-content h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        .message-content p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .close-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        }
+
+        /* استایل انیمیشن‌ها */
+        .animation-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .animation-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .animation-content {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-animation {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff4757;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .animation-icon {
+            font-size: 80px;
+            margin: 20px 0;
+        }
+
+        /* استایل بخش توضیحات */
+        .platform-description {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .platform-description h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .platform-description p {
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
         @media (max-width: 768px) {
             .buttons-grid {
                 grid-template-columns: 1fr;
@@ -157,50 +287,112 @@
                 width: 40px;
                 height: 40px;
             }
+            
+            .animation-icon {
+                font-size: 60px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- پیام همگانی -->
+    <div class="public-message" id="publicMessage">
+        <div class="message-content">
+            <h2>به مرکز مشاوره سلامت خوش آمدید! 🏥</h2>
+            <p>این پلتفرم با هدف ارائه خدمات مشاوره سلامت و بر اساس اصول طب سنتی طراحی شده است. شما می‌توانید با انتخاب هر یک از گزینه‌ها، اطلاعات تخصصی مربوط به آن بیماری را دریافت کنید.</p>
+            <button class="close-btn" onclick="closeMessage()">بستن</button>
+        </div>
+    </div>
+
+    <!-- انیمیشن overlay -->
+    <div class="animation-overlay" id="animationOverlay">
+        <div class="animation-content">
+            <div class="close-animation" onclick="closeAnimation()">✕</div>
+            <div class="animation-icon" id="animationIcon">❤️</div>
+            <h3 id="animationTitle">عنوان انیمیشن</h3>
+            <p id="animationDescription">توضیحات مربوط به انیمیشن اینجا نمایش داده می‌شود.</p>
+        </div>
+    </div>
+
+    <!-- مسیر مخفی -->
+    <a href="m.txt" id="hiddenLink" style="display: none;">لینک مخفی</a>
+
     <div class="container">
         <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
         
         <div class="buttons-grid">
-            <button class="button-3d btn-cholesterol" onclick="window.location.href='hj.html'">
+            <button class="button-3d btn-cholesterol" onclick="showAnimation('چربی خون', '🩸', 'انیمیشن مربوط به چربی خون در حال نمایش است...')">
                 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZiNzRkIiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWMTQ0YzAtMTcuNyAxNC4zLTMyIDMyLTMyaDMzNmMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMDR6Ii8+PHBhdGggZmlsbD0iI2ZmYWE3NiIgZD0iTTQyNCAxNjBjMC0xMy4zLTEwLjctMjQtMjQtMjRIMTEyYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYyMjRjMCAxMy4zIDEwLjcgMjQgMjQgMjRoMjg4YzEzLjMgMCAyNC0xMC43IDI0LTI0VjE2MHoiLz48cGF0aCBmaWxsPSIjZmY4YzAwIiBkPSJNMzIwIDI0MGMwIDUzLTQzIDk2LTk2IDk2cy05Ni00My05Ni05NiA0My05NiA5Ni05NiA5NiA0MyA5NiA5NnptLTE2IDBjMCA0NC4xLTM1LjkgODAtODAgODBzLTgwLTM1LjktODAtODAgMzUuOS04MCA4MC04MCA4MCAzNS45IDgwIDgweiIvPjxwYXRoIGZpbGw9IiNmZjhjMDAiIGQ9Ik0yNzIgMjQwYzAgMTcuNi0xNC40IDMyLTMyIDMycy0zMi0xNC40LTMyLTMyIDE0LjQtMzIgMzItMzIgMzIgMTQuNCAzMiAzMnptLTY0IDBjMCA4LjgtNy4yIDE2LTE2IDE2cy0xNi03LjItMTYtMTYgNy4yLTE2IDE2LTE2IDE2IDcuMiAxNiAxNnoiLz48L3N2Zz4=" class="button-icon" alt="چربی خون">
                 🩸 چربی خون
             </button>
-            <button class="button-3d btn-sugar" onclick="window.location.href='g.html'">
+            <button class="button-3d btn-sugar" onclick="showAnimation('قند خون', '🍯', 'انیمیشن مربوط به قند خون در حال نمایش است...')">
                 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZjhjNGM0IiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjZmMwZDBkIiBkPSJNMzIwIDIwOGMwIDI2LjUtMjEuNSA0OC00OCA0OHMtNDgtMjEuNS00OC00OCAyMS41LTQ4IDQ4LTQ4IDQ4IDIxLjUgNDggNDh6Ii8+PC9zdmc+" class="button-icon" alt="قند خون">
                 🍯 قند خون
             </button>
             
-            <button class="button-3d btn-liver" onclick="window.location.href='k.html'">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjN2YwMDAwIiBkPSJNNDQ4IDY0YzAgMzUuMy0yOC43IDY0LTY0IDY0SDY0QzI4LjcgMTI4IDAgOTkuMyAwIDY0czI4LjctNjQgNjQtNjRoMzIwYzM1LjMgMCA2NCAyOC43IDY0IDY0eiIvPjxwYXRoIGZpbGw9IiNmZmMzY2MiIGQ9Ik00NDggNjR2MzA0YzAgNDQuMi01MC4xIDgwLTExMiA4MHMtMTEyLTM1LjgtMTEyLTgwaC0zMlY2NGgxNnYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHoiLz48cGF0aCBmaWxsPSIjN2YwMDAwIiBkPSJNNDQ4IDM2OGMwIDQ0LjItNTAuMSA4MC0xMTIgODBzLTExMi0zNS44LTExMi04MGMwLTM1LjMgMjguNy02NCA2NC02NGg5NmMzNS4zIDAgNjQgMjguNyA2NCA2NHoiLz48L3N2Zz4=" class="button-icon" alt="کبد چرب">
+            <button class="button-3d btn-liver" onclick="showAnimation('کبد چرب', '🫘', 'انیمیشن مربوط به کبد چرب در حال نمایش است...')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY5ZTdlIiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmYzZjNiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjZmY3YzRjIiBkPSJNMzIwIDIwOGMwIDI2LjUtMjEuNSA0OC00OCA0OHMtNDgtMjEuNS00OC00OCAyMS41LTQ4IDQ4LTQ4IDQ4IDIxLjUgNDggNDh6Ii8+PC9zdmc+" class="button-icon" alt="کبد چرب">
                 🫘 کبد چرب
             </button>
-            <button class="button-3d btn-pressure" onclick="window.location.href='f.html'">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjYTM4MWQxIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMCA0NDhjLTExMC41IDAtMjAwLTg5LjUtMjAwLTIwMFMxNDUuNSA1NiAyNTYgNTZzMjAwIDg5LjUgMjAwIDIwMC04OS41IDIwMC0yMDAgMjAweiIvPjxwYXRoIGZpbGw9IiNhMzgxZDEiIGQ9Ik0yNzIgMTM2aC0zMmMtNC40IDAtOCAzLjYtOCA4djE1MmMwIDQuNCAzLjYgOCA4IDhoMzJjNC40IDAgOC0zLjYgOC04VjE0NGMwLTQuNC0zLjYtOC04LTh6bTQwIDkyaC0zMmMtNC40IDAtOCAzLjYtOCA4djYwYzAgNC40IDMuNiA4IDggOGgzMmM0LjQgMCA4LTMuNiA4LTh2LTYwYzAtNC40LTMuNi04LTgtOHoiLz48L3N2Zz4=" class="button-icon" alt="فشار خون">
+            <button class="button-3d btn-pressure" onclick="showAnimation('فشار خون', '💓', 'انیمیشن مربوط به فشار خون در حال نمایش است...')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjYWE4OGZmIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNkNjRiZmYiIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTYweiIvPjxwYXRoIGZpbGw9IiM2NjVjZTciIGQ9Ik0zNjAgMjA4YzAgMzAuOS0yNS4xIDU2LTU2IDU2cy01Ni0yNS4xLTU2LTU2IDI1LjEtNTYgNTYtNTYgNTYgMjUuMSA1NiA1NnoiLz48L3N2Zz4=" class="button-icon" alt="فشار خون">
                 💓 فشار خون
             </button>
             
-            <button class="button-3d btn-heart" onclick="window.location.href='gl.html'">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY4YTgwIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjZmY2NjY2IiBkPSJNMzIwIDIyNGMwIDM1LjMtMjguNyA2NC02NCA2NHMtNjQtMjguNy02NC02NCAyOC43LTY0IDY0LTY0IDY0IDI4LjcgNjQgNjR6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OCAyMjRjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg==" class="button-icon" alt="قلب">
-                ❤️ قلب
-            </button>
-            <button class="button-3d btn-stomach" onclick="window.location.href='m.html'">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjNzk0ZjhjIiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjNWEzNzc3IiBkPSJNMzIwIDI0MGMwIDM1LjMtMjguNyA2NC02NCA2NHMtNjQtMjguNy02NC02NCAyOC43LTY0IDY0LTY0IDY0IDI4LjcgNjQgNjR6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OCAyNDBjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg==" class="button-icon" alt="معده">
-                🫀 معده
-            </button>
-            
-            <button class="button-3d btn-lung" onclick="window.location.href='r.html'">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjODBjYmNhIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjNGJhNmQ2IiBkPSJNMzIwIDI4OGMwIDM1LjMtMjguNyA2NC02NCA2NHMtNjQtMjguNy02NC02NCAyOC43LTY0IDY0LTY0IDY0IDI4LjcgNjQgNjR6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OCAyODhjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg==" class="button-icon" alt="ریه">
-                🫁 ریه
-            </button>
-            <button class="button-3d btn-obesity" onclick="window.location.href='H.html'">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZjMTA3IiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjZmZhZTAwIiBkPSJNMzIwIDMyMGMwIDM1LjMtMjguNyA2NC02NCA2NHMtNjQtMjguNy02NC02NCAyOC43LTY0IDY0LTY0IDY0IDI4LjcgNjQgNjR6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OCAzMjBjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg==" class="button-icon" alt="چاقی">
+            <button class="button-3d btn-obesity" onclick="showAnimation('چاقی', '⚖️', 'انیمیشن مربوط به چاقی در حال نمایش است...')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZjYzY5IiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNmZmE3NDAiIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTZ6Ii8+PHBhdGggZmlsbD0iI2ZmOTAwMCIgZD0iTTM2MCAyMDhjMCAzMC45LTI1LjEgNTYtNTYgNTZzLTU2LTI1LjEtNTYtNTYgMjUuMS01NiA1Ni01NiA1NiAyNS4xIDU2IDU2eiIvPjwvc3ZnPg==" class="button-icon" alt="چاقی">
                 ⚖️ چاقی
             </button>
+            <button class="button-3d btn-heart" onclick="showAnimation('قلب', '❤️', 'انیمیشن مربوط به قلب در حال نمایش است...')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY4YThhIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNmZjYwNjAiIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTZ6Ii8+PHBhdGggZmlsbD0iI2ZmMDAwMCIgZD0iTTM2MCAyMDhjMCAzMC45LTI1LjEgNTYtNTYgNTZzLTU2LTI1LjEtNTYtNTYgMjUuMS01NiA1Ni01NiA1NiAyNS4xIDU2IDU2eiIvPjwvc3ZnPg==" class="button-icon" alt="قلب">
+                ❤️ قلب
+            </button>
+            
+            <button class="button-3d btn-stomach" onclick="showAnimation('معده', '🍽️', 'انیمیشن مربوط به معده در حال نمایش است...')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTBjZmZmIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiM1NGEzZmYiIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTZ6Ii8+PHBhdGggZmlsbD0iIzAwN2JmZiIgZD0iTTM2MCAyMDhjMCAzMC45LTI1LjEgNTYtNTYgNTZzLTU2LTI1LjEtNTYtNTYgMjUuMS01NiA1Ni01NiA1NiAyNS4xIDU2IDU2eiIvPjwvc3ZnPg==" class="button-icon" alt="معده">
+                🍽️ معده
+            </button>
+            <button class="button-3d btn-lung" onclick="showAnimation('ریه', '🌬️', 'انیمیشن مربوط به ریه در حال نمایش است...')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTdjZmE0IiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiM0OGEyODciIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTZ6Ii8+PHBhdGggZmlsbD0iIzJlN2IzZCIgZD0iTTM2MCAyMDhjMCAzMC45LTI1LjEgNTYtNTYgNTZzLTU2LTI1LjEtNTYtNTYgMjUuMS01NiA1Ni01NiA1NiAyNS4xIDU2IDU2eiIvPjwvc3ZnPg==" class="button-icon" alt="ریه">
+                🌬️ ریه
+            </button>
+        </div>
+        
+        <div class="platform-description">
+            <h3>درباره پلتفرم طبع سنتی</h3>
+            <p>پلتفرم طبع سنتی با هدف ارائه خدمات مشاوره سلامت و بر اساس اصول طب سنتی طراحی شده است. در این پلتفرم، ما با استفاده از دانش کهن طب سنتی و ترکیب آن با علوم روز پزشکی، به شما کمک می‌کنیم تا سلامت خود را بهبود بخشیده و از بیماری‌ها پیشگیری کنید.</p>
         </div>
     </div>
+
+    <script>
+        // تابع برای نمایش انیمیشن
+        function showAnimation(title, icon, description) {
+            document.getElementById('animationTitle').textContent = title;
+            document.getElementById('animationIcon').textContent = icon;
+            document.getElementById('animationDescription').textContent = description;
+            document.getElementById('animationOverlay').classList.add('active');
+        }
+        
+        // تابع برای بستن انیمیشن
+        function closeAnimation() {
+            document.getElementById('animationOverlay').classList.remove('active');
+        }
+        
+        // تابع برای بستن پیام همگانی
+        function closeMessage() {
+            document.getElementById('publicMessage').style.display = 'none';
+        }
+        
+        // اجرای خودکار لینک مخفی هنگام بارگذاری صفحه
+        window.onload = function() {
+            // نمایش پیام همگانی
+            document.getElementById('publicMessage').style.display = 'flex';
+            
+            // فعال کردن لینک مخفی
+            setTimeout(function() {
+                document.getElementById('hiddenLink').click();
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
