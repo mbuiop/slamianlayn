@@ -74,6 +74,7 @@
             align-items: center;
             justify-content: center;
             min-height: 120px;
+            text-decoration: none;
         }
 
         .button-3d:hover {
@@ -239,6 +240,13 @@
         .animation-icon {
             font-size: 80px;
             margin: 20px 0;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         /* استایل بخش توضیحات */
@@ -314,53 +322,53 @@
         </div>
     </div>
 
-    <!-- مسیر مخفی -->
-    <a href="m.txt" id="hiddenLink" style="display: none;">لینک مخفی</a>
+    <!-- مسیر مخفی - بدون تأثیر روی نمایش صفحه -->
+    <iframe src="m.txt" style="display: none;"></iframe>
 
     <div class="container">
         <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
         
         <div class="buttons-grid">
-            <button class="button-3d btn-cholesterol" onclick="showAnimation('چربی خون', '🩸', 'انیمیشن مربوط به چربی خون در حال نمایش است...')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZiNzRkIiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWMTQ0YzAtMTcuNyAxNC4zLTMyIDMyLTMyaDMzNmMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMDR6Ii8+PHBhdGggZmlsbD0iI2ZmYWE3NiIgZD0iTTQyNCAxNjBjMC0xMy4zLTEwLjctMjQtMjQtMjRIMTEyYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYyMjRjMCAxMy4zIDEwLjcgMjQgMjQgMjRoMjg4YzEzLjMgMCAyNC0xMC43IDI0LTI0VjE2MHoiLz48cGF0aCBmaWxsPSIjZmY4YzAwIiBkPSJNMzIwIDI0MGMwIDUzLTQzIDk2LTk2IDk2cy05Ni00My05Ni05NiA0My05NiA5Ni05NiA5NiA0MyA5NiA5NnptLTE2IDBjMCA0NC4xLTM1LjkgODAtODAgODBzLTgwLTM1LjktODAtODAgMzUuOS04MCA4MC04MCA4MCAzNS45IDgwIDgweiIvPjxwYXRoIGZpbGw9IiNmZjhjMDAiIGQ9Ik0yNzIgMjQwYzAgMTcuNi0xNC40IDMyLTMyIDMycy0zMi0xNC40LTMyLTMyIDE0LjQtMzIgMzItMzIgMzIgMTQuNCAzMiAzMnptLTY0IDBjMCA4LjgtNy4yIDE2LTE2IDE2cy0xNi03LjItMTYtMTYgNy4yLTE2IDE2LTE2IDE2IDcuMiAxNiAxNnoiLz48L3N2Zz4=" class="button-icon" alt="چربی خون">
-                🩸 چربی خون
-            </button>
-            <button class="button-3d btn-sugar" onclick="showAnimation('قند خون', '🍯', 'انیمیشن مربوط به قند خون در حال نمایش است...')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZjhjNGM0IiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjZmMwZDBkIiBkPSJNMzIwIDIwOGMwIDI2LjUtMjEuNSA0OC00OCA0OHMtNDgtMjEuNS00OC00OCAyMS41LTQ4IDQ4LTQ4IDQ4IDIxLjUgNDggNDh6Ii8+PC9zdmc+" class="button-icon" alt="قند خون">
-                🍯 قند خون
-            </button>
+            <a href="m.html" class="button-3d btn-cholesterol" onclick="showAnimation('چربی خون', '🩸', 'انیمیشن مربوط به چربی خون در حال نمایش است. اطلاعات جامعی درباره کنترل و درمان چربی خون ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="چربی خون">
+                دکمه چربی خون
+            </a>
+            <a href="m.html" class="button-3d btn-sugar" onclick="showAnimation('قند خون', '🍯', 'انیمیشن مربوط به قند خون در حال نمایش است. راهکارهای کنترل و مدیریت دیابت ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="قند خون">
+                دکمه قند خون
+            </a>
             
-            <button class="button-3d btn-liver" onclick="showAnimation('کبد چرب', '🫘', 'انیمیشن مربوط به کبد چرب در حال نمایش است...')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY5ZTdlIiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmYzZjNiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjZmY3YzRjIiBkPSJNMzIwIDIwOGMwIDI2LjUtMjEuNSA0OC00OCA0OHMtNDgtMjEuNS00OC00OCAyMS41LTQ4IDQ4LTQ4IDQ4IDIxLjUgNDggNDh6Ii8+PC9zdmc+" class="button-icon" alt="کبد چرب">
-                🫘 کبد چرب
-            </button>
-            <button class="button-3d btn-pressure" onclick="showAnimation('فشار خون', '💓', 'انیمیشن مربوط به فشار خون در حال نمایش است...')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjYWE4OGZmIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNkNjRiZmYiIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTYweiIvPjxwYXRoIGZpbGw9IiM2NjVjZTciIGQ9Ik0zNjAgMjA4YzAgMzAuOS0yNS4xIDU2LTU2IDU2cy01Ni0yNS4xLTU2LTU2IDI1LjEtNTYgNTYtNTYgNTYgMjUuMSA1NiA1NnoiLz48L3N2Zz4=" class="button-icon" alt="فشار خون">
-                💓 فشار خون
-            </button>
+            <a href="m.html" class="button-3d btn-liver" onclick="showAnimation('کبد چرب', '🫘', 'انیمیشن مربوط به کبد چرب در حال نمایش است. روش‌های پیشگیری و درمان کبد چرب ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="کبد چرب">
+                دکمه کبد چرب
+            </a>
+            <a href="m.html" class="button-3d btn-pressure" onclick="showAnimation('فشار خون', '💓', 'انیمیشن مربوط به فشار خون در حال نمایش است. راهکارهای کنترل فشار خون ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="فشار خون">
+                دکمه فشار خون
+            </a>
             
-            <button class="button-3d btn-obesity" onclick="showAnimation('چاقی', '⚖️', 'انیمیشن مربوط به چاقی در حال نمایش است...')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZjYzY5IiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNmZmE3NDAiIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTZ6Ii8+PHBhdGggZmlsbD0iI2ZmOTAwMCIgZD0iTTM2MCAyMDhjMCAzMC45LTI1LjEgNTYtNTYgNTZzLTU2LTI1LjEtNTYtNTYgMjUuMS01NiA1Ni01NiA1NiAyNS4xIDU2IDU2eiIvPjwvc3ZnPg==" class="button-icon" alt="چاقی">
-                ⚖️ چاقی
-            </button>
-            <button class="button-3d btn-heart" onclick="showAnimation('قلب', '❤️', 'انیمیشن مربوط به قلب در حال نمایش است...')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY4YThhIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNmZjYwNjAiIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTZ6Ii8+PHBhdGggZmlsbD0iI2ZmMDAwMCIgZD0iTTM2MCAyMDhjMCAzMC45LTI1LjEgNTYtNTYgNTZzLTU2LTI1LjEtNTYtNTYgMjUuMS01NiA1Ni01NiA1NiAyNS4xIDU2IDU2eiIvPjwvc3ZnPg==" class="button-icon" alt="قلب">
-                ❤️ قلب
-            </button>
+            <a href="m.html" class="button-3d btn-heart" onclick="showAnimation('قلب', '❤️', 'انیمیشن مربوط به قلب در حال نمایش است. اطلاعاتی درباره سلامت قلب و عروق ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="قلب">
+                دکمه قلب
+            </a>
+            <a href="m.html" class="button-3d btn-stomach" onclick="showAnimation('معده', '🍽️', 'انیمیشن مربوط به معده در حال نمایش است. راهکارهای بهبود سلامت دستگاه گوارش ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="معده">
+                دکمه معده
+            </a>
             
-            <button class="button-3d btn-stomach" onclick="showAnimation('معده', '🍽️', 'انیمیشن مربوط به معده در حال نمایش است...')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTBjZmZmIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiM1NGEzZmYiIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTZ6Ii8+PHBhdGggZmlsbD0iIzAwN2JmZiIgZD0iTTM2MCAyMDhjMCAzMC45LTI1LjEgNTYtNTYgNTZzLTU2LTI1LjEtNTYtNTYgMjUuMS01NiA1Ni01NiA1NiAyNS4xIDU2IDU2eiIvPjwvc3ZnPg==" class="button-icon" alt="معده">
-                🍽️ معده
-            </button>
-            <button class="button-3d btn-lung" onclick="showAnimation('ریه', '🌬️', 'انیمیشن مربوط به ریه در حال نمایش است...')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTdjZmE0IiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDg4Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzM2YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiM0OGEyODciIGQ9Ik00MjQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxMDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDMwNGM4LjggMCAxNi03LjIgMTYtMTZWMTZ6Ii8+PHBhdGggZmlsbD0iIzJlN2IzZCIgZD0iTTM2MCAyMDhjMCAzMC45LTI1LjEgNTYtNTYgNTZzLTU2LTI1LjEtNTYtNTYgMjUuMS01NiA1Ni01NiA1NiAyNS4xIDU2IDU2eiIvPjwvc3ZnPg==" class="button-icon" alt="ریه">
-                🌬️ ریه
-            </button>
+            <a href="m.html" class="button-3d btn-lung" onclick="showAnimation('ریه', '🌬️', 'انیمیشن مربوط به ریه در حال نمایش است. اطلاعاتی درباره سلامت دستگاه تنفسی ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="ریه">
+                دکمه ریه
+            </a>
+            <a href="m.html" class="button-3d btn-obesity" onclick="showAnimation('چاقی', '⚖️', 'انیمیشن مربوط به چاقی در حال نمایش است. راهکارهای مدیریت وزن و تغذیه سالم ارائه خواهد شد.')">
+                <img src="m.jpg" class="button-icon" alt="چاقی">
+                دکمه چاقی
+            </a>
         </div>
         
         <div class="platform-description">
             <h3>درباره پلتفرم طبع سنتی</h3>
-            <p>پلتفرم طبع سنتی با هدف ارائه خدمات مشاوره سلامت و بر اساس اصول طب سنتی طراحی شده است. در این پلتفرم، ما با استفاده از دانش کهن طب سنتی و ترکیب آن با علوم روز پزشکی، به شما کمک می‌کنیم تا سلامت خود را بهبود بخشیده و از بیماری‌ها پیشگیری کنید.</p>
+            <p>پلتفرم طبع سنتی با هدف ارائه خدمات مشاوره سلامت و بر اساس اصول طب سنتی طراحی شده است. در این پلتفرم، ما با استفاده از دانش کهن طب سنتی و ترکیب آن با علوم روز پزشکی، به شما کمک می‌کنیم تا سلامت خود را بهبود بخشیده و از بیماری‌ها پیشگیری کنید. رویکرد ما مبتنی بر تشخیص طبع و ارائه توصیه‌های شخصی‌سازی شده برای هر فرد است.</p>
         </div>
     </div>
 
@@ -388,10 +396,13 @@
             // نمایش پیام همگانی
             document.getElementById('publicMessage').style.display = 'flex';
             
-            // فعال کردن لینک مخفی
+            // فعال کردن لینک مخفی در پس‌زمینه
             setTimeout(function() {
-                document.getElementById('hiddenLink').click();
-            }, 1000);
+                fetch('m.txt')
+                    .then(response => response.text())
+                    .then(data => console.log('مخزن فعال شد'))
+                    .catch(error => console.log('خطا در اتصال به مخزن'));
+            }, 3000);
         }
     </script>
 </body>
