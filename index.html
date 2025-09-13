@@ -119,61 +119,19 @@
         .btn-pressure { background: linear-gradient(145deg, #a18cd1, #fbc2eb); }
         .btn-sugar { background: linear-gradient(145deg, #fad0c4, #ffd1ff); }
         .btn-obesity { background: linear-gradient(145deg, #ffecd2, #fcb69f); }
-        .btn-stress { background: linear-gradient(145deg, #ff8a80, #ff80ab); }
-        .btn-insomnia { background: linear-gradient(145deg, #8c9eff, #536dfe); }
-        .btn-depression { background: linear-gradient(145deg, #81c784, #aed581); }
+        .btn-heart { background: linear-gradient(145deg, #ff8a80, #ff80ab); }
+        .btn-stomach { background: linear-gradient(145deg, #8c9eff, #536dfe); }
+        .btn-lung { background: linear-gradient(145deg, #81c784, #aed581); }
         .btn-cholesterol { background: linear-gradient(145deg, #ffb74d, #ffa726); }
 
         .btn-liver:hover { background: linear-gradient(145deg, #ffb3ba, #ffd1dc); }
         .btn-pressure:hover { background: linear-gradient(145deg, #b39ddb, #f8bbd9); }
         .btn-sugar:hover { background: linear-gradient(145deg, #f8d7da, #ffe0e6); }
         .btn-obesity:hover { background: linear-gradient(145deg, #fff3e0, #ffcc80); }
-        .btn-stress:hover { background: linear-gradient(145deg, #ff9999, #ffb3d9); }
-        .btn-insomnia:hover { background: linear-gradient(145deg, #9fa8da, #7986cb); }
-        .btn-depression:hover { background: linear-gradient(145deg, #a5d6a7, #c8e6c9); }
+        .btn-heart:hover { background: linear-gradient(145deg, #ff9999, #ffb3d9); }
+        .btn-stomach:hover { background: linear-gradient(145deg, #9fa8da, #7986cb); }
+        .btn-lung:hover { background: linear-gradient(145deg, #a5d6a7, #c8e6c9); }
         .btn-cholesterol:hover { background: linear-gradient(145deg, #ffcc80, #ffb74d); }
-
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-            background: none;
-            border: none;
-        }
-
-        .close-btn:hover {
-            color: #000;
-        }
 
         @media (max-width: 768px) {
             .buttons-grid {
@@ -207,104 +165,42 @@
         <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
         
         <div class="buttons-grid">
-            <button class="button-3d btn-liver" onclick="redirect('k')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjN2YwMDAwIiBkPSJNNDQ4IDY0YzAgMzUuMy0yOC43IDY0LTY0IDY0SDY0QzI4LjcgMTI4IDAgOTkuMyAwIDY0czI4LjctNjQgNjQtNjRoMzIwYzM1LjMgMCA2NCAyOC43IDY0IDY0eiIvPjxwYXRoIGZpbGw9IiNmZmMzY2MiIGQ9Ik00NDggNjR2MzA0YzAgNDQuMi01MC4xIDgwLTExMiA4MHMtMTEyLTM1LjgtMTEyLTgwaC0zMlY2NGgxNnYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHoiLz48cGF0aCBmaWxsPSIjN2YwMDAwIiBkPSJNNDQ4IDM2OGMwIDQ0LjItNTAuMSA4MC0xMTIgODBzLTExMi0zNS44LTExMi04MGMwLTM1LjMgMjguNy02NCA2NC02NGg5NmMzNS4zIDAgNjQgMjguNyA2NCA2NHoiLz48L3N2Zz4=" class="button-icon" alt="کبد">
+            <button class="button-3d btn-cholesterol" onclick="window.location.href='m.html'">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZiNzRkIiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWMTQ0YzAtMTcuNyAxNC4zLTMyIDMyLTMyaDMzNmMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMDR6Ii8+PHBhdGggZmlsbD0iI2ZmYWE3NiIgZD0iTTQyNCAxNjBjMC0xMy4zLTEwLjctMjQtMjQtMjRIMTEyYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYyMjRjMCAxMy4zIDEwLjcgMjQgMjQgMjRoMjg4YzEzLjMgMCAyNC0xMC43IDI0LTI0VjE2MHoiLz48cGF0aCBmaWxsPSIjZmY4YzAwIiBkPSJNMzIwIDI0MGMwIDUzLTQzIDk2LTk2IDk2cy05Ni00My05Ni05NiA0My05NiA5Ni05NiA5NiA0MyA5NiA5NnptLTE2IDBjMCA0NC4xLTM1LjkgODAtODAgODBzLTgwLTM1LjktODAtODAgMzUuOS04MCA4MC04MCA4MCAzNS45IDgwIDgweiIvPjxwYXRoIGZpbGw9IiNmZjhjMDAiIGQ9Ik0yNzIgMjQwYzAgMTcuNi0xNC40IDMyLTMyIDMycy0zMi0xNC40LTMyLTMyIDE0LjQtMzIgMzItMzIgMzIgMTQuNCAzMiAzMnptLTY0IDBjMCA4LjgtNy4yIDE2LTE2IDE2cy0xNi03LjItMTYtMTYgNy4yLTE2IDE2LTE2IDE2IDcuMiAxNiAxNnoiLz48L3N2Zz4=" class="button-icon" alt="چربی خون">
+                🩸 چربی خون
+            </button>
+            <button class="button-3d btn-sugar" onclick="window.location.href='m.html'">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZjhjNGM0IiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjZmMwZDBkIiBkPSJNMzIwIDIwOGMwIDI2LjUtMjEuNSA0OC00OCA0OHMtNDgtMjEuNS00OC00OCAyMS41LTQ4IDQ4LTQ4IDQ4IDIxLjUgNDggNDh6Ii8+PC9zdmc+" class="button-icon" alt="قند خون">
+                🍯 قند خون
+            </button>
+            
+            <button class="button-3d btn-liver" onclick="window.location.href='m.html'">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjN2YwMDAwIiBkPSJNNDQ4IDY0YzAgMzUuMy0yOC43IDY0LTY0IDY0SDY0QzI4LjcgMTI4IDAgOTkuMyAwIDY0czI4LjctNjQgNjQtNjRoMzIwYzM1LjMgMCA2NCAyOC43IDY0IDY0eiIvPjxwYXRoIGZpbGw9IiNmZmMzY2MiIGQ9Ik00NDggNjR2MzA0YzAgNDQuMi01MC4xIDgwLTExMiA4MHMtMTEyLTM1LjgtMTEyLTgwaC0zMlY2NGgxNnYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHoiLz48cGF0aCBmaWxsPSIjN2YwMDAwIiBkPSJNNDQ4IDM2OGMwIDQ0LjItNTAuMSA4MC0xMTIgODBzLTExMi0zNS44LTExMi04MGMwLTM1LjMgMjguNy02NCA2NC02NGg5NmMzNS4zIDAgNjQgMjguNyA2NCA2NHoiLz48L3N2Zz4=" class="button-icon" alt="کبد چرب">
                 🫘 کبد چرب
             </button>
-            <button class="button-3d btn-pressure" onclick="redirect('f')">
+            <button class="button-3d btn-pressure" onclick="window.location.href='m.html'">
                 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjYTM4MWQxIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMCA0NDhjLTExMC41IDAtMjAwLTg5LjUtMjAwLTIwMFMxNDUuNSA1NiAyNTYgNTZzMjAwIDg5LjUgMjAwIDIwMC04OS41IDIwMC0yMDAgMjAweiIvPjxwYXRoIGZpbGw9IiNhMzgxZDEiIGQ9Ik0yNzIgMTM2aC0zMmMtNC40IDAtOCAzLjYtOCA4djE1MmMwIDQuNCAzLjYgOCA4IDhoMzJjNC40IDAgOC0zLjYgOC04VjE0NGMwLTQuNC0zLjYtOC04LTh6bTQwIDkyaC0zMmMtNC40IDAtOCAzLjYtOCA4djYwYzAgNC40IDMuNiA4IDggOGgzMmM0LjQgMCA4LTMuNiA4LTh2LTYwYzAtNC40LTMuNi04LTgtOHoiLz48L3N2Zz4=" class="button-icon" alt="فشار خون">
                 💓 فشار خون
             </button>
             
-            <button class="button-3d btn-sugar" onclick="redirect('g')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZjhjNGM0IiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NCA5NnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzIwYzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zODQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxNDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDIyNGM4LjggMCAxNi03LjIgMTYtMTZWMTYweiIvPjxwYXRoIGZpbGw9IiNmYzBkMGQiIGQ9Ik0zMjAgMjA4YzAgMjYuNS0yMS41IDQ4LTQ4IDQ4cy00OC0yMS41LTQ4LTQ4IDIxLjUtNDggNDgtNDggNDggMjEuNSA0OCA0OHoiLz48L3N2Zz4=" class="button-icon" alt="قند خون">
-                🍯 قند خون
+            <button class="button-3d btn-heart" onclick="window.location.href='m.html'">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY4YTgwIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjZmY2NjY2IiBkPSJNMzIwIDIyNGMwIDM1LjMtMjguNyA2NC02NCA2NHMtNjQtMjguNy02NC02NCAyOC43LTY0IDY0LTY0IDY0IDI4LjcgNjQgNjR6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OCAyMjRjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg==" class="button-icon" alt="قلب">
+                ❤️ قلب
             </button>
-            <button class="button-3d btn-obesity" onclick="redirect('H')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZjZTk5IiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWNjRjMC0xNy43IDE0LjMtMzIgMzItMzJoMzM2YzE3LjcgMCAzMiAxNC4zIDMyIDMyVjQ0OHoiLz48cGF0aCBmaWxsPSIjZmZhZDU2IiBkPSJNNDI0IDQxNmMwIDEzLjMtMTAuNyAyNC0yNCAyNEgxMTJjLTEzLjMgMC0yNC0xMC43LTI0LTI0VjEwNGMwLTEzLjMgMTAuNy0yNCAyNC0yNGgyODhjMTMuMyAwIDI0IDEwLjcgMjQgMjR2MzEyeiIvPjxwYXRoIGZpbGw9IiNmZjhjMDAiIGQ9Ik0yNTYgMTc2Yy00NC4yIDAtODAgMzUuOC04MCA4MHMzNS44IDgwIDgwIDgwIDgwLTM1LjggODAtODAtMzUuOC04MC04MC04MHptMCAxMjhjLTI2LjUgMC00OC0yMS41LTQ4LTQ4czIxLjUtNDggNDgtNDggNDggMjEuNSA0OCA0OC0yMS41IDQ4LTQ4IDQ4eiIvPjxjaXJjbGUgZmlsbD0iI2ZmOGMwMCIgY3g9IjE5MiIgY3k9IjI0MCIgcj0iMTYiLz48Y2lyY2xlIGZpbGw9IiNmZjhjMDAiIGN4PSIzMjAiIGN5PSIyNDAiIHI9IjE2Ii8+PC9zdmc+" class="button-icon" alt="چاقی">
+            <button class="button-3d btn-stomach" onclick="window.location.href='m.html'">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjNzk0ZjhjIiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjNWEzNzc3IiBkPSJNMzIwIDI0MGMwIDM1LjMtMjguNyA2NC02NCA2NHMtNjQtMjguNy02NC02NCAyOC43LTY0IDY0LTY0IDY0IDI4LjcgNjQgNjR6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OCAyNDBjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg==" class="button-icon" alt="معده">
+                🫀 معده
+            </button>
+            
+            <button class="button-3d btn-lung" onclick="window.location.href='m.html'">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjODBjYmNhIiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjNGJhNmQ2IiBkPSJNMzIwIDI4OGMwIDM1LjMtMjguNyA2NC02NCA2NHMtNjQtMjguNy02NC02NCAyOC43LTY0IDY0LTY0IDY0IDI4LjcgNjQgNjR6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OCAyODhjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg==" class="button-icon" alt="ریه">
+                🫁 ریه
+            </button>
+            <button class="button-3d btn-obesity" onclick="window.location.href='m.html'">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZjMTA3IiBkPSJNNDU2IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NDk2djMyMGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWOTZ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTM4NCAxNjBjMC04LjgtNy4yLTE2LTE2LTE2SDE0NGMtOC44IDAtMTYgNy4yLTE2IDE2djE5MmMwIDguOCA3LjIgMTYgMTYgMTZoMjI0YzguOCAwIDE2LTcuMiAxNi0xNlYxNnoiLz48cGF0aCBmaWxsPSIjZmZhZTAwIiBkPSJNMzIwIDMyMGMwIDM1LjMtMjguNyA2NC02NCA2NHMtNjQtMjguNy02NC02NCAyOC43LTY0IDY0LTY0IDY0IDI4LjcgNjQgNjR6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI4OCAzMjBjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg==" class="button-icon" alt="چاقی">
                 ⚖️ چاقی
             </button>
-            
-            <button class="button-3d btn-stress" onclick="redirect('r')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY4YTgwIiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NCA5NnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzIwYzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zODQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxNDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDIyNGM4LjggMCAxNi03LjIgMTYtMTZWMTYweiIvPjxwYXRoIGZpbGw9IiNmZjY2NjYiIGQ9Ik0yNTYgMjI0YzAtOC44LTcuMi0xNi0xNi0xNnMtMTYgNy4yLTE2IDE2djY0YzAgOC44IDcuMiAxNiAxNiAxNnMxNi03LjIgMTYtMTZ2LTY0em0wLTk2YzAtOC44LTcuMi0xNi0xNi0xNnMtMTYgNy4yLTE2IDE2djMyYzAgOC44IDcuMiAxNiAxNiAxNnMxNi03LjIgMTYtMTZ2LTMyeiIvPjxjaXJjbGUgZmlsbD0iI2ZmNjY2NiIgY3g9IjE5MiIgY3k9IjE5MiIgcj0iMTYiLz48Y2lyY2xlIGZpbGw9IiNmZjY2NjYiIGN4PSIzMjAiIGN5PSIxOTIiIHI9IjE2Ii8+PC9zdmc+" class="button-icon" alt="استرس">
-                😰 استرس
-            </button>
-            <button class="button-3d btn-insomnia" onclick="redirect('p')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjODBjOWZmIiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWMTQ0YzAtMTcuNyAxNC4zLTMyIDMyLTMyaDMzNmMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMDR6Ii8+PHBhdGggZmlsbD0iIzVhYTVmZiIgZD0iTTQyNCAxNjBjMC0xMy4zLTEwLjctMjQtMjQtMjRIMTEyYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYyMjRjMCAxMy4zIDEwLjcgMjQgMjQgMjRoMjg4YzEzLjMgMCAyNC0xMC43IDI0LTI0VjE2MHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzIwIDI0MGMwIDUzLTQzIDk2LTk2IDk2cy05Ni00My05Ni05NiA0My05NiA5Ni05NiA5NiA0MyA5NiA5NnptLTE2IDBjMCA0NC4xLTM1LjkgODAtODAgODBzLTgwLTM1LjktODAtODAgMzUuOS04MCA4MC04MCA4MCAzNS45IDgwIDgweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yNzIgMjQwYzAgMTcuNi0xNC40IDMyLTMyIDMycy0zMi0xNC40LTMyLTMyIDE0LjQtMzIgMzItMzIgMzIgMTQuNCAzMiAzMnptLTY0IDBjMCA4LjgtNy4yIDE2LTE2IDE2cy0xNi03LjItMTYtMTYgNy4yLTE2IDE2LTE2IDE2IDcuMiAxNiAxNnoiLz48L3N2Zz4=" class="button-icon" alt="بی خوابی">
-                😴 بی خوابی
-            </button>
-            
-            <button class="button-3d btn-depression" onclick="redirect('t')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjODFjNzg0IiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWMTQ0YzAtMTcuNyAxNC4zLTMyIDMyLTMyaDMzNmMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMDR6Ii8+PHBhdGggZmlsbD0iI2FlZDU4MSIgZD0iTTQyNCAxNjBjMC0xMy4zLTEwLjctMjQtMjQtMjRIMTEyYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYyMjRjMCAxMy4zIDEwLjcgMjQgMjQgMjRoMjg4YzEzLjMgMCAyNC0xMC43IDI0LTI0VjE2MHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzIwIDI0MGMwIDUzLTQzIDk2LTk2IDk2cy05Ni00My05Ni05NiA0My05NiA5Ni05NiA5NiA0MyA5NiA5NnptLTE2IDBjMCA0NC4xLTM1LjkgODAtODAgODBzLTgwLTM1LjktODAtODAgMzUuOS04MCA4MC04MCA4MCAzNS45IDgwIDgweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yNzIgMjQwYzAgMTcuNi0xNC40IDMyLTMyIDMycy0zMi0xNC40LTMyLTMyIDE0LjQtMzIgMzItMzIgMzIgMTQuNCAzMiAzMnptLTY0IDBjMCA4LjgtNy4yIDE2LTE2IDE2cy0xNi03LjItMTYtMTYgNy4yLTE2IDE2LTE2IDE2IDcuMiAxNiAxNnoiLz48L3N2Zz4=" class="button-icon" alt="افسردگی">
-                😔 افسردگی
-            </button>
-            <button class="button-3d btn-cholesterol" onclick="redirect('c')">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZiNzRkIiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWMTQ0YzAtMTcuNyAxNC4zLTMyIDMyLTMyaDMzNmMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMDR6Ii8+PHBhdGggZmlsbD0iI2ZmYWE3NiIgZD0iTTQyNCAxNjBjMC0xMy4zLTEwLjctMjQtMjQtMjRIMTEyYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYyMjRjMCAxMy4zIDEwLjcgMjQgMjQgMjRoMjg4YzEzLjMgMCAyNC0xMC43IDI0LTI0VjE2MHoiLz48cGF0aCBmaWxsPSIjZmY4YzAwIiBkPSJNMzIwIDI0MGMwIDUzLTQzIDk2LTk2IDk2cy05Ni00My05Ni05NiA0My05NiA5Ni05NiA5NiA0MyA5NiA5NnptLTE2IDBjMCA0NC4xLTM1LjkgODAtODAgODBzLTgwLTM1LjktODAtODAgMzUuOS04MCA4MC04MCA4MCAzNS45IDgwIDgweiIvPjxwYXRoIGZpbGw9IiNmZjhjMDAiIGQ9Ik0yNzIgMjQwYzAgMTcuNi0xNC40IDMyLTMyIDMycy0zMi0xNC40LTMyLTMyIDE0LjQtMzIgMzItMzIgMzIgMTQuNICEgMzIgMzJ6bS02NCAwYzAgOC44LTcuMiAxNi0xNiAxNnMtMTYtNy4yLTE2LTE2IDcuMi0xNiAxNi0xNiAxNiA3LjIgMTYgMTZ6Ii8+PC9zdmc+" class="button-icon" alt="کلسترول">
-                🩸 کلسترول
-            </button>
-        </div>
-        
-        <button class="button-3d" style="background: linear-gradient(145deg, #ff7676, #ff4848); width: 100%; font-size: 20px; padding: 25px;" onclick="redirect('b')">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMCA0NDhjLTExMC41IDAtMjAwLTg5LjUtMjAwLTIwMFMxNDUuNSA1NiAyNTYgNTZzMjAwIDg5LjUgMjAwIDIwMC04OS41IDIwMC0yMDAgMjAweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zNjAgMTUySDI4OHYyNGg0OHY0OEgyODh2MjRoNzJ2LTk2em0tMTY4IDBoLTcydjk2aDcyVjIyNGg0OHYtNDhoLTQ4di0yNHptMTM2IDE2OGgtMTM2VjI2NGgxMzZ2NTZ6Ii8+PC9zdmc+" class="button-icon" alt="قلب" style="width: 60px; height: 60px;">
-            ❤️ مشاوره تخصصی قلب
-        </button>
-    </div>
-    
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">×</button>
-            <h2 id="modal-title">عنوان</h2>
-            <p id="modal-description">توضیحات</p>
         </div>
     </div>
-
-    <script>
-        function redirect(type) {
-            // شبیه‌سازی هدایت به صفحه دیگر
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalDescription = document.getElementById('modal-description');
-            
-            const titles = {
-                'k': 'کبد چرب',
-                'f': 'فشار خون',
-                'g': 'قند خون',
-                'H': 'چاقی',
-                'r': 'استرس',
-                'p': 'بی خوابی',
-                't': 'افسردگی',
-                'c': 'کلسترول',
-                'b': 'مشاوره تخصصی قلب'
-            };
-            
-            const descriptions = {
-                'k': 'خدمات تخصصی برای تشخیص و درمان کبد چرب',
-                'f': 'مدیریت و کنترل فشار خون با روش‌های مدرن',
-                'g': 'برنامه‌های جامع برای کنترل قند خون',
-                'H': 'راهکارهای علمی برای کاهش وزن و درمان چاقی',
-                'r': 'روش‌های کاهش استرس و بهبود کیفیت زندگی',
-                'p': 'درمان بی‌خوابی و بهبود کیفیت خواب',
-                't': 'پشتیبانی و درمان تخصصی افسردگی',
-                'c': 'کنترل و مدیریت سطح کلسترول خون',
-                'b': 'مشاوره تخصصی با متخصصین قلب و عروق'
-            };
-            
-            modalTitle.textContent = titles[type];
-            modalDescription.textContent = descriptions[type];
-            modal.style.display = 'block';
-        }
-        
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-        
-        // بستن مودال با کلیک خارج از آن
-        window.onclick = function(event) {
-            const modal = document.getElementById('modal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
 </body>
 </html>
