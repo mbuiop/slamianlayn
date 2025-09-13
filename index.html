@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مرکز سلامت</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .button-3d {
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            border: none;
+            border-radius: 15px;
+            padding: 20px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.2),
+                -8px -8px 16px rgba(255, 255, 255, 0.8),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+                inset -2px -2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+
+        .button-3d:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                12px 12px 24px rgba(0, 0, 0, 0.3),
+                -12px -12px 24px rgba(255, 255, 255, 0.9),
+                inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+                inset -3px -3px 6px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(145deg, #f0f0f0, #ffffff);
+        }
+
+        .button-3d:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 
+                4px 4px 8px rgba(0, 0, 0, 0.15),
+                -4px -4px 8px rgba(255, 255, 255, 0.7),
+                inset 4px 4px 8px rgba(0, 0, 0, 0.1),
+                inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        .button-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .button-3d:hover::before {
+            left: 100%;
+        }
+
+        /* رنگ‌های مختلف برای دکمه‌ها */
+        .btn-liver { background: linear-gradient(145deg, #ff9a9e, #fecfef); }
+        .btn-pressure { background: linear-gradient(145deg, #a18cd1, #fbc2eb); }
+        .btn-sugar { background: linear-gradient(145deg, #fad0c4, #ffd1ff); }
+        .btn-obesity { background: linear-gradient(145deg, #ffecd2, #fcb69f); }
+        .btn-stress { background: linear-gradient(145deg, #ff8a80, #ff80ab); }
+        .btn-insomnia { background: linear-gradient(145deg, #8c9eff, #536dfe); }
+        .btn-depression { background: linear-gradient(145deg, #81c784, #aed581); }
+        .btn-cholesterol { background: linear-gradient(145deg, #ffb74d, #ffa726); }
+
+        .btn-liver:hover { background: linear-gradient(145deg, #ffb3ba, #ffd1dc); }
+        .btn-pressure:hover { background: linear-gradient(145deg, #b39ddb, #f8bbd9); }
+        .btn-sugar:hover { background: linear-gradient(145deg, #f8d7da, #ffe0e6); }
+        .btn-obesity:hover { background: linear-gradient(145deg, #fff3e0, #ffcc80); }
+        .btn-stress:hover { background: linear-gradient(145deg, #ff9999, #ffb3d9); }
+        .btn-insomnia:hover { background: linear-gradient(145deg, #9fa8da, #7986cb); }
+        .btn-depression:hover { background: linear-gradient(145deg, #a5d6a7, #c8e6c9); }
+        .btn-cholesterol:hover { background: linear-gradient(145deg, #ffcc80, #ffb74d); }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            background: none;
+            border: none;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .buttons-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .button-3d {
+                font-size: 16px;
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
+        
+        <div class="buttons-grid">
+            <button class="button-3d btn-liver" onclick="redirect('liver')">
+                🫘 کبد چرب
+            </button>
+            <button class="button-3d btn-pressure" onclick="redirect('pressure')">
+                💓 فشار خون
+            </button>
+            
+            <button class="button-3d btn-sugar" onclick="redirect('sugar')">
+                🍯 قند خون
+            </button>
+            <button class="button-3d btn-obesity" onclick="redirect('obesity')">
+                ⚖️ چاقی
+            </button>
+            
+            <button class="button-3d btn-stress" onclick="redirect('stress')">
+                😰 استرس
+            </button>
+            <button class="button-3d btn-insomnia" onclick="redirect('insomnia')">
+                😴 بی‌خوابی
+            </button>
+            
+            <button class="button-3d btn-depression" onclick="redirect('depression')">
+                😔 افسردگی
+            </button>
+            <button class="button-3d btn-cholesterol" onclick="redirect('cholesterol')">
+                🩸 چربی خون
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal for special content -->
+    <div id="specialModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div id="modalBody">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hidden path functionality
+        let specialContentShown = false;
+
+        function redirect(type) {
+            // Create the path based on button type
+            window.location.href = type + '.html';
+        }
+
+        // Check for special file on page load
+        window.addEventListener('load', function() {
+            checkSpecialContent();
+        });
+
+        async function checkSpecialContent() {
+            if (specialContentShown) return;
+            
+            try {
+                // Try to fetch the hidden file
+                const response = await fetch('m.txt');
+                if (response.ok) {
+                    const content = await response.text();
+                    if (content.trim()) {
+                        showSpecialModal(content);
+                        specialContentShown = true;
+                    }
+                }
+            } catch (error) {
+                // File doesn't exist or can't be accessed - this is normal
+                console.log('No special content found');
+            }
+        }
+
+        function showSpecialModal(content) {
+            const modal = document.getElementById('specialModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Format the content
+            modalBody.innerHTML = `
+                <h2 style="color: #333; margin-bottom: 20px;">📢 اطلاعیه ویژه</h2>
+                <div style="text-align: right; line-height: 1.8; color: #555;">
+                    ${content.replace(/\n/g, '<br>')}
+                </div>
+                <button onclick="closeModal()" style="
+                    margin-top: 20px; 
+                    padding: 10px 20px; 
+                    background: #667eea; 
+                    color: white; 
+                    border: none; 
+                    border-radius: 10px; 
+                    cursor: pointer;
+                    font-size: 16px;
+                ">بستن</button>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('specialModal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('specialModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Add some interactive animations
+        document.querySelectorAll('.button-3d').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
