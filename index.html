@@ -22,7 +22,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             width: 100%;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -30,16 +30,6 @@
             padding: 40px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .left-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         h1 {
@@ -48,7 +38,6 @@
             font-size: 2.5em;
             margin-bottom: 40px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            grid-column: span 2;
         }
 
         .buttons-grid {
@@ -76,6 +65,11 @@
                 inset -2px -2px 4px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             transform: translateZ(0);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
         }
 
         .button-3d:hover {
@@ -112,6 +106,14 @@
             left: 100%;
         }
 
+        /* استایل جدید برای آیکون‌ها */
+        .button-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+            object-fit: contain;
+        }
+
         /* رنگ‌های مختلف برای دکمه‌ها */
         .btn-liver { background: linear-gradient(145deg, #ff9a9e, #fecfef); }
         .btn-pressure { background: linear-gradient(145deg, #a18cd1, #fbc2eb); }
@@ -130,47 +132,6 @@
         .btn-insomnia:hover { background: linear-gradient(145deg, #9fa8da, #7986cb); }
         .btn-depression:hover { background: linear-gradient(145deg, #a5d6a7, #c8e6c9); }
         .btn-cholesterol:hover { background: linear-gradient(145deg, #ffcc80, #ffb74d); }
-
-        /* Image Display Area */
-        .image-display {
-            width: 100%;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .organ-image {
-            width: 300px;
-            height: 300px;
-            opacity: 0;
-            transform: scale(0.8) rotate(-10deg);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: absolute;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        }
-
-        .organ-image.active {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-        }
-
-        .default-text {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.5em;
-            text-align: center;
-            transition: opacity 0.3s ease;
-        }
-
-        .default-text.hidden {
-            opacity: 0;
-        }
 
         /* Modal styles */
         .modal {
@@ -215,15 +176,13 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px;
-            }
-            
             .buttons-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
+            }
+            
+            .container {
+                padding: 20px;
             }
             
             h1 {
@@ -233,15 +192,12 @@
             .button-3d {
                 font-size: 16px;
                 padding: 15px 20px;
+                min-height: 100px;
             }
-
-            .image-display {
-                height: 250px;
-            }
-
-            .organ-image {
-                width: 200px;
-                height: 200px;
+            
+            .button-icon {
+                width: 40px;
+                height: 40px;
             }
         }
     </style>
@@ -250,241 +206,105 @@
     <div class="container">
         <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
         
-        <div class="left-section">
-            <div class="buttons-grid">
-                <button class="button-3d btn-liver" onclick="redirect('k')" onmouseenter="showImage('liver')" onmouseleave="hideImage()">
-                    🫘 کبد چرب
-                </button>
-                <button class="button-3d btn-pressure" onclick="redirect('f')" onmouseenter="showImage('heart')" onmouseleave="hideImage()">
-                    💖 فشار خون
-                </button>
-                
-                <button class="button-3d btn-sugar" onclick="redirect('g')" onmouseenter="showImage('pancreas')" onmouseleave="hideImage()">
-                    🍯 قند خون
-                </button>
-                <button class="button-3d btn-obesity" onclick="redirect('H')" onmouseenter="showImage('scale')" onmouseleave="hideImage()">
-                    ⚖️ چاقی
-                </button>
-                
-                <button class="button-3d btn-stress" onclick="redirect('r')" onmouseenter="showImage('lungs')" onmouseleave="hideImage()">
-                    😰 ریه 
-                </button>
-                <button class="button-3d btn-insomnia" onclick="redirect('m')" onmouseenter="showImage('stomach')" onmouseleave="hideImage()">
-                    😴 معده
-                </button>
-                
-                <button class="button-3d btn-depression" onclick="redirect('gl')" onmouseenter="showImage('heart2')" onmouseleave="hideImage()">
-                    😔 قلب
-                </button>
-                <button class="button-3d btn-cholesterol" onclick="redirect('hj')" onmouseenter="showImage('blood')" onmouseleave="hideImage()">
-                    🩸 چربی خون
-                </button>
-            </div>
-        </div>
-
-        <div class="image-display">
-            <div class="default-text" id="defaultText">
-                🔍 روی هر دکمه قرار دهید تا تصویر مربوطه را ببینید
-            </div>
+        <div class="buttons-grid">
+            <button class="button-3d btn-liver" onclick="redirect('k')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjN2YwMDAwIiBkPSJNNDQ4IDY0YzAgMzUuMy0yOC43IDY0LTY0IDY0SDY0QzI4LjcgMTI4IDAgOTkuMyAwIDY0czI4LjctNjQgNjQtNjRoMzIwYzM1LjMgMCA2NCAyOC43IDY0IDY0eiIvPjxwYXRoIGZpbGw9IiNmZmMzY2MiIGQ9Ik00NDggNjR2MzA0YzAgNDQuMi01MC4xIDgwLTExMiA4MHMtMTEyLTM1LjgtMTEyLTgwaC0zMlY2NGgxNnYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHYyNDBjMCA4LjggNy4yIDE2IDE2IDE2czE2LTcuMiAxNi0xNlY2NGg0OHoiLz48cGF0aCBmaWxsPSIjN2YwMDAwIiBkPSJNNDQ4IDM2OGMwIDQ0LjItNTAuMSA4MC0xMTIgODBzLTExMi0zNS44LTExMi04MGMwLTM1LjMgMjguNy02NCA2NC02NGg5NmMzNS4zIDAgNjQgMjguNyA2NCA2NHoiLz48L3N2Zz4=" class="button-icon" alt="کبد">
+                🫘 کبد چرب
+            </button>
+            <button class="button-3d btn-pressure" onclick="redirect('f')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjYTM4MWQxIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMCA0NDhjLTExMC41IDAtMjAwLTg5LjUtMjAwLTIwMFMxNDUuNSA1NiAyNTYgNTZzMjAwIDg5LjUgMjAwIDIwMC04OS41IDIwMC0yMDAgMjAweiIvPjxwYXRoIGZpbGw9IiNhMzgxZDEiIGQ9Ik0yNzIgMTM2aC0zMmMtNC40IDAtOCAzLjYtOCA4djE1MmMwIDQuNCAzLjYgOCA4IDhoMzJjNC40IDAgOC0zLjYgOC04VjE0NGMwLTQuNC0zLjYtOC04LTh6bTQwIDkyaC0zMmMtNC40IDAtOCAzLjYtOCA4djYwYzAgNC40IDMuNiA4IDggOGgzMmM0LjQgMCA4LTMuNiA4LTh2LTYwYzAtNC40LTMuNi04LTgtOHoiLz48L3N2Zz4=" class="button-icon" alt="فشار خون">
+                💓 فشار خون
+            </button>
             
-            <!-- Liver SVG -->
-            <svg class="organ-image" id="liver" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <path d="M80 120c-20 0-30 20-25 40c5 15 15 25 30 30c20 8 40 5 60 0c25-8 45-20 50-45c3-20-10-35-25-40c-20-8-40-5-60 0c-10 3-20 8-30 15z" fill="#8B4513" stroke="#654321" stroke-width="3"/>
-                <path d="M150 140c15-5 35-8 50-5c20 5 35 20 30 40c-5 20-25 30-45 25c-15-3-30-15-35-30c-5-20 0-30 0-30z" fill="#A0522D" stroke="#654321" stroke-width="3"/>
-                <circle cx="120" cy="150" r="5" fill="#654321"/>
-                <circle cx="180" cy="160" r="4" fill="#654321"/>
-            </svg>
-
-            <!-- Heart SVG -->
-            <svg class="organ-image" id="heart" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <path d="M150,250 C100,200 50,150 50,100 C50,75 75,50 100,50 C125,50 150,75 150,100 C150,75 175,50 200,50 C225,50 250,75 250,100 C250,150 200,200 150,250 Z" fill="#DC143C" stroke="#B22222" stroke-width="4"/>
-                <path d="M120,80 C130,70 140,75 145,85" fill="none" stroke="#FF6B8A" stroke-width="3" opacity="0.7"/>
-                <circle cx="110" cy="90" r="3" fill="#FF6B8A" opacity="0.8"/>
-                <circle cx="190" cy="95" r="2" fill="#FF6B8A" opacity="0.6"/>
-            </svg>
-
-            <!-- Pancreas SVG -->
-            <svg class="organ-image" id="pancreas" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="150" cy="150" rx="100" ry="30" fill="#DEB887" stroke="#CD853F" stroke-width="3"/>
-                <path d="M70,140 Q50,130 60,110 Q80,120 90,130" fill="#F4A460" stroke="#CD853F" stroke-width="2"/>
-                <path d="M200,160 Q250,170 240,190 Q220,180 210,170" fill="#F4A460" stroke="#CD853F" stroke-width="2"/>
-                <circle cx="120" cy="145" r="4" fill="#CD853F"/>
-                <circle cx="180" cy="155" r="3" fill="#CD853F"/>
-                <circle cx="160" cy="140" r="2" fill="#CD853F"/>
-            </svg>
-
-            <!-- Scale SVG -->
-            <svg class="organ-image" id="scale" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <rect x="140" y="50" width="20" height="200" fill="#4682B4" stroke="#2F4F4F" stroke-width="2"/>
-                <ellipse cx="150" cy="60" rx="80" ry="15" fill="#87CEEB" stroke="#4682B4" stroke-width="2"/>
-                <rect x="120" y="240" width="60" height="20" rx="10" fill="#2F4F4F"/>
-                <text x="150" y="140" text-anchor="middle" font-family="Arial" font-size="24" font-weight="bold" fill="#2F4F4F">75</text>
-                <text x="150" y="165" text-anchor="middle" font-family="Arial" font-size="12" fill="#4682B4">KG</text>
-            </svg>
-
-            <!-- Lungs SVG -->
-            <svg class="organ-image" id="lungs" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="100" cy="150" rx="40" ry="80" fill="#FFB6C1" stroke="#FF69B4" stroke-width="3"/>
-                <ellipse cx="200" cy="150" rx="40" ry="80" fill="#FFB6C1" stroke="#FF69B4" stroke-width="3"/>
-                <path d="M130,90 Q150,80 170,90" fill="none" stroke="#FF1493" stroke-width="4"/>
-                <path d="M140,95 L150,110 L160,95" fill="none" stroke="#FF1493" stroke-width="2"/>
-                <circle cx="85" cy="130" r="8" fill="#FF91A4" opacity="0.7"/>
-                <circle cx="215" cy="140" r="6" fill="#FF91A4" opacity="0.7"/>
-                <circle cx="100" cy="180" r="5" fill="#FF91A4" opacity="0.5"/>
-                <circle cx="200" cy="170" r="7" fill="#FF91A4" opacity="0.6"/>
-            </svg>
-
-            <!-- Stomach SVG -->
-            <svg class="organ-image" id="stomach" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <path d="M120,80 Q100,60 80,80 Q70,120 80,160 Q90,220 130,240 Q170,250 200,220 Q220,180 210,140 Q200,100 180,90 Q160,85 150,95 Q140,85 120,80 Z" fill="#DDA0DD" stroke="#9370DB" stroke-width="3"/>
-                <path d="M140,100 Q120,90 110,110" fill="none" stroke="#BA55D3" stroke-width="2"/>
-                <ellipse cx="150" cy="160" rx="30" ry="20" fill="#E6E6FA" opacity="0.6"/>
-                <circle cx="130" cy="140" r="4" fill="#9370DB"/>
-                <circle cx="170" cy="180" r="3" fill="#9370DB"/>
-            </svg>
-
-            <!-- Heart2 SVG (different style) -->
-            <svg class="organ-image" id="heart2" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <path d="M150,250 C100,200 50,150 50,100 C50,75 75,50 100,50 C125,50 150,75 150,100 C150,75 175,50 200,50 C225,50 250,75 250,100 C250,150 200,200 150,250 Z" fill="#FF1493" stroke="#DC143C" stroke-width="4"/>
-                <path d="M150,100 L150,220" stroke="#FFB6C1" stroke-width="3"/>
-                <path d="M100,120 Q150,140 200,120" fill="none" stroke="#FFB6C1" stroke-width="2"/>
-                <circle cx="120" cy="110" r="6" fill="#FF69B4" opacity="0.8"/>
-                <circle cx="180" cy="115" r="5" fill="#FF69B4" opacity="0.7"/>
-            </svg>
-
-            <!-- Blood SVG -->
-            <svg class="organ-image" id="blood" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="150" cy="150" r="80" fill="none" stroke="#DC143C" stroke-width="6"/>
-                <circle cx="120" cy="120" r="12" fill="#FF0000"/>
-                <circle cx="180" cy="140" r="10" fill="#FF4500"/>
-                <circle cx="160" cy="180" r="14" fill="#FF0000"/>
-                <circle cx="130" cy="170" r="8" fill="#FF6347"/>
-                <circle cx="200" cy="180" r="11" fill="#FF0000"/>
-                <circle cx="100" cy="160" r="9" fill="#FF4500"/>
-                <circle cx="170" cy="120" r="7" fill="#FF6347"/>
-                <path d="M80,100 Q150,50 220,100" fill="none" stroke="#FF0000" stroke-width="3"/>
-                <path d="M80,200 Q150,250 220,200" fill="none" stroke="#FF0000" stroke-width="3"/>
-            </svg>
+            <button class="button-3d btn-sugar" onclick="redirect('g')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZjhjNGM0IiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NCA5NnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzIwYzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zODQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxNDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDIyNGM4LjggMCAxNi03LjIgMTYtMTZWMTYweiIvPjxwYXRoIGZpbGw9IiNmYzBkMGQiIGQ9Ik0zMjAgMjA4YzAgMjYuNS0yMS41IDQ4LTQ4IDQ4cy00OC0yMS41LTQ4LTQ4IDIxLjUtNDggNDgtNDggNDggMjEuNSA0OCA0OHoiLz48L3N2Zz4=" class="button-icon" alt="قند خون">
+                🍯 قند خون
+            </button>
+            <button class="button-3d btn-obesity" onclick="redirect('H')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZjZTk5IiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWNjRjMC0xNy43IDE0LjMtMzIgMzItMzJoMzM2YzE3LjcgMCAzMiAxNC4zIDMyIDMyVjQ0OHoiLz48cGF0aCBmaWxsPSIjZmZhZDU2IiBkPSJNNDI0IDQxNmMwIDEzLjMtMTAuNyAyNC0yNCAyNEgxMTJjLTEzLjMgMC0yNC0xMC43LTI0LTI0VjEwNGMwLTEzLjMgMTAuNy0yNCAyNC0yNGgyODhjMTMuMyAwIDI0IDEwLjcgMjQgMjR2MzEyeiIvPjxwYXRoIGZpbGw9IiNmZjhjMDAiIGQ9Ik0yNTYgMTc2Yy00NC4yIDAtODAgMzUuOC04MCA4MHMzNS44IDgwIDgwIDgwIDgwLTM1LjggODAtODAtMzUuOC04MC04MC04MHptMCAxMjhjLTI2LjUgMC00OC0yMS41LTQ4LTQ4czIxLjUtNDggNDgtNDggNDggMjEuNSA0OCA0OC0yMS41IDQ4LTQ4IDQ4eiIvPjxjaXJjbGUgZmlsbD0iI2ZmOGMwMCIgY3g9IjE5MiIgY3k9IjI0MCIgcj0iMTYiLz48Y2lyY2xlIGZpbGw9IiNmZjhjMDAiIGN4PSIzMjAiIGN5PSIyNDAiIHI9IjE2Ii8+PC9zdmc+" class="button-icon" alt="چاقی">
+                ⚖️ چاقی
+            </button>
+            
+            <button class="button-3d btn-stress" onclick="redirect('r')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY4YTgwIiBkPSJNNDQ4IDk2YzAtMTcuNy0xNC4zLTMyLTMyLTMySDk2Qzc4LjMgNjQgNjQgNzguMyA2NCA5NnYzMjBjMCAxNy43IDE0LjMgMzIgMzIgMzJoMzIwYzE3LjcgMCAzMi0xNC4zIDMyLTMyVjk2eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zODQgMTYwYzAtOC44LTcuMi0xNi0xNi0xNkgxNDRjLTguOCAwLTE2IDcuMi0xNiAxNnYxOTJjMCA4LjggNy4yIDE2IDE2IDE2aDIyNGM4LjggMCAxNi03LjIgMTYtMTZWMTYweiIvPjxwYXRoIGZpbGw9IiNmZjY2NjYiIGQ9Ik0yNTYgMjI0YzAtOC44LTcuMi0xNi0xNi0xNnMtMTYgNy4yLTE2IDE2djY0YzAgOC44IDcuMiAxNiAxNiAxNnMxNi03LjIgMTYtMTZ2LTY0em0wLTk2YzAtOC44LTcuMi0xNi0xNi0xNnMtMTYgNy4yLTE2IDE2djMyYzAgOC44IDcuMiAxNiAxNiAxNnMxNi03LjIgMTYtMTZ2LTMyeiIvPjxjaXJjbGUgZmlsbD0iI2ZmNjY2NiIgY3g9IjE5MiIgY3k9IjE5MiIgcj0iMTYiLz48Y2lyY2xlIGZpbGw9IiNmZjY2NjYiIGN4PSIzMjAiIGN5PSIxOTIiIHI9IjE2Ii8+PC9zdmc+" class="button-icon" alt="استرس">
+                😰 استرس
+            </button>
+            <button class="button-3d btn-insomnia" onclick="redirect('p')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjODBjOWZmIiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWMTQ0YzAtMTcuNyAxNC4zLTMyIDMyLTMyaDMzNmMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMDR6Ii8+PHBhdGggZmlsbD0iIzVhYTVmZiIgZD0iTTQyNCAxNjBjMC0xMy4zLTEwLjctMjQtMjQtMjRIMTEyYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYyMjRjMCAxMy4zIDEwLjcgMjQgMjQgMjRoMjg4YzEzLjMgMCAyNC0xMC43IDI0LTI0VjE2MHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzIwIDI0MGMwIDUzLTQzIDk2LTk2IDk2cy05Ni00My05Ni05NiA0My05NiA5Ni05NiA5NiA0MyA5NiA5NnptLTE2IDBjMCA0NC4xLTM1LjkgODAtODAgODBzLTgwLTM1LjktODAtODAgMzUuOS04MCA4MC04MCA4MCAzNS45IDgwIDgweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yNzIgMjQwYzAgMTcuNi0xNC40IDMyLTMyIDMycy0zMi0xNC40LTMyLTMyIDE0LjQtMzIgMzItMzIgMzIgMTQuNCAzMiAzMnptLTY0IDBjMCA4LjgtNy4yIDE2LTE2IDE2cy0xNi03LjItMTYtMTYgNy4yLTE2IDE2LTE2IDE2IDcuMiAxNiAxNnoiLz48L3N2Zz4=" class="button-icon" alt="بی خوابی">
+                😴 بی خوابی
+            </button>
+            
+            <button class="button-3d btn-depression" onclick="redirect('t')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjODFjNzg0IiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWMTQ0YzAtMTcuNyAxNC4zLTMyIDMyLTMyaDMzNmMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMDR6Ii8+PHBhdGggZmlsbD0iI2FlZDU4MSIgZD0iTTQyNCAxNjBjMC0xMy4zLTEwLjctMjQtMjQtMjRIMTEyYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYyMjRjMCAxMy4zIDEwLjcgMjQgMjQgMjRoMjg4YzEzLjMgMCAyNC0xMC43IDI0LTI0VjE2MHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzIwIDI0MGMwIDUzLTQzIDk2LTk2IDk2cy05Ni00My05Ni05NiA0My05NiA5Ni05NiA5NiA0MyA5NiA5NnptLTE2IDBjMCA0NC4xLTM1LjkgODAtODAgODBzLTgwLTM1LjktODAtODAgMzUuOS04MCA4MC04MCA4MCAzNS45IDgwIDgweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yNzIgMjQwYzAgMTcuNi0xNC40IDMyLTMyIDMycy0zMi0xNC40LTMyLTMyIDE0LjQtMzIgMzItMzIgMzIgMTQuNCAzMiAzMnptLTY0IDBjMCA4LjgtNy4yIDE2LTE2IDE2cy0xNi03LjItMTYtMTYgNy4yLTE2IDE2LTE2IDE2IDcuMiAxNiAxNnoiLz48L3N2Zz4=" class="button-icon" alt="افسردگی">
+                😔 افسردگی
+            </button>
+            <button class="button-3d btn-cholesterol" onclick="redirect('c')">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZiNzRkIiBkPSJNNDU2IDQ0OGMwIDE3LjctMTQuMyAzMi0zMiAzMkg4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJWMTQ0YzAtMTcuNyAxNC4zLTMyIDMyLTMyaDMzNmMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMDR6Ii8+PHBhdGggZmlsbD0iI2ZmYWE3NiIgZD0iTTQyNCAxNjBjMC0xMy4zLTEwLjctMjQtMjQtMjRIMTEyYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYyMjRjMCAxMy4zIDEwLjcgMjQgMjQgMjRoMjg4YzEzLjMgMCAyNC0xMC43IDI0LTI0VjE2MHoiLz48cGF0aCBmaWxsPSIjZmY4YzAwIiBkPSJNMzIwIDI0MGMwIDUzLTQzIDk2LTk2IDk2cy05Ni00My05Ni05NiA0My05NiA5Ni05NiA5NiA0MyA5NiA5NnptLTE2IDBjMCA0NC4xLTM1LjkgODAtODAgODBzLTgwLTM1LjktODAtODAgMzUuOS04MCA4MC04MCA4MCAzNS45IDgwIDgweiIvPjxwYXRoIGZpbGw9IiNmZjhjMDAiIGQ9Ik0yNzIgMjQwYzAgMTcuNi0xNC40IDMyLTMyIDMycy0zMi0xNC40LTMyLTMyIDE0LjQtMzIgMzItMzIgMzIgMTQuNICEgMzIgMzJ6bS02NCAwYzAgOC44LTcuMiAxNi0xNiAxNnMtMTYtNy4yLTE2LTE2IDcuMi0xNiAxNi0xNiAxNiA3LjIgMTYgMTZ6Ii8+PC9zdmc+" class="button-icon" alt="کلسترول">
+                🩸 کلسترول
+            </button>
         </div>
+        
+        <button class="button-3d" style="background: linear-gradient(145deg, #ff7676, #ff4848); width: 100%; font-size: 20px; padding: 25px;" onclick="redirect('b')">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMCA0NDhjLTExMC41IDAtMjAwLTg5LjUtMjAwLTIwMFMxNDUuNSA1NiAyNTYgNTZzMjAwIDg5LjUgMjAwIDIwMC04OS41IDIwMC0yMDAgMjAweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zNjAgMTUySDI4OHYyNGg0OHY0OEgyODh2MjRoNzJ2LTk2em0tMTY4IDBoLTcydjk2aDcyVjIyNGg0OHYtNDhoLTQ4di0yNHptMTM2IDE2OGgtMTM2VjI2NGgxMzZ2NTZ6Ii8+PC9zdmc+" class="button-icon" alt="قلب" style="width: 60px; height: 60px;">
+            ❤️ مشاوره تخصصی قلب
+        </button>
     </div>
-
-    <!-- Modal for special content -->
-    <div id="specialModal" class="modal">
+    
+    <div id="modal" class="modal">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">&times;</button>
-            <div id="modalBody">
-                <!-- Content will be loaded here -->
-            </div>
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <h2 id="modal-title">عنوان</h2>
+            <p id="modal-description">توضیحات</p>
         </div>
     </div>
 
     <script>
-        // Hidden path functionality
-        let specialContentShown = false;
-        let currentActiveImage = null;
-
         function redirect(type) {
-            // Create the path based on button type
-            window.location.href = type + '.html';
-        }
-
-        function showImage(imageId) {
-            // Hide default text
-            document.getElementById('defaultText').classList.add('hidden');
+            // شبیه‌سازی هدایت به صفحه دیگر
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
             
-            // Hide current active image
-            if (currentActiveImage) {
-                document.getElementById(currentActiveImage).classList.remove('active');
-            }
+            const titles = {
+                'k': 'کبد چرب',
+                'f': 'فشار خون',
+                'g': 'قند خون',
+                'H': 'چاقی',
+                'r': 'استرس',
+                'p': 'بی خوابی',
+                't': 'افسردگی',
+                'c': 'کلسترول',
+                'b': 'مشاوره تخصصی قلب'
+            };
             
-            // Show new image
-            currentActiveImage = imageId;
-            document.getElementById(imageId).classList.add('active');
-        }
-
-        function hideImage() {
-            // Show default text
-            document.getElementById('defaultText').classList.remove('hidden');
+            const descriptions = {
+                'k': 'خدمات تخصصی برای تشخیص و درمان کبد چرب',
+                'f': 'مدیریت و کنترل فشار خون با روش‌های مدرن',
+                'g': 'برنامه‌های جامع برای کنترل قند خون',
+                'H': 'راهکارهای علمی برای کاهش وزن و درمان چاقی',
+                'r': 'روش‌های کاهش استرس و بهبود کیفیت زندگی',
+                'p': 'درمان بی‌خوابی و بهبود کیفیت خواب',
+                't': 'پشتیبانی و درمان تخصصی افسردگی',
+                'c': 'کنترل و مدیریت سطح کلسترول خون',
+                'b': 'مشاوره تخصصی با متخصصین قلب و عروق'
+            };
             
-            // Hide current active image
-            if (currentActiveImage) {
-                document.getElementById(currentActiveImage).classList.remove('active');
-                currentActiveImage = null;
-            }
-        }
-
-        // Check for special file on page load
-        window.addEventListener('load', function() {
-            checkSpecialContent();
-        });
-
-        async function checkSpecialContent() {
-            if (specialContentShown) return;
-            
-            try {
-                // Try to fetch the hidden file
-                const response = await fetch('m.txt');
-                if (response.ok) {
-                    const content = await response.text();
-                    if (content.trim()) {
-                        showSpecialModal(content);
-                        specialContentShown = true;
-                    }
-                }
-            } catch (error) {
-                // File doesn't exist or can't be accessed - this is normal
-                console.log('No special content found');
-            }
-        }
-
-        function showSpecialModal(content) {
-            const modal = document.getElementById('specialModal');
-            const modalBody = document.getElementById('modalBody');
-            
-            // Format the content
-            modalBody.innerHTML = `
-                <h2 style="color: #333; margin-bottom: 20px;">📢 اطلاعیه ویژه</h2>
-                <div style="text-align: right; line-height: 1.8; color: #555;">
-                    ${content.replace(/\n/g, '<br>')}
-                </div>
-                <button onclick="closeModal()" style="
-                    margin-top: 20px; 
-                    padding: 10px 20px; 
-                    background: #667eea; 
-                    color: white; 
-                    border: none; 
-                    border-radius: 10px; 
-                    cursor: pointer;
-                    font-size: 16px;
-                ">بستن</button>
-            `;
-            
+            modalTitle.textContent = titles[type];
+            modalDescription.textContent = descriptions[type];
             modal.style.display = 'block';
         }
-
+        
         function closeModal() {
-            const modal = document.getElementById('specialModal');
-            modal.style.display = 'none';
+            document.getElementById('modal').style.display = 'none';
         }
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('specialModal');
-            if (event.target === modal) {
+        
+        // بستن مودال با کلیک خارج از آن
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
                 closeModal();
             }
-        });
-
-        // Add some interactive animations
-        document.querySelectorAll('.button-3d').forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.02)';
-            });
-            
-            button.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+        }
     </script>
 </body>
 </html>
