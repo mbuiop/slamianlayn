@@ -73,7 +73,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            aspect-ratio: 1/1; /* مربع شکل */
+            aspect-ratio: 1/1;
             text-decoration: none;
         }
 
@@ -111,19 +111,19 @@
             left: 100%;
         }
 
-        /* استایل جدید برای آیکون‌ها - بزرگتر */
+        /* استایل جدید برای آیکون‌ها - بزرگتر و تمیزتر */
         .button-icon {
-            width: 70px;
-            height: 70px;
+            width: 140px; /* بزرگتر */
+            height: 100px; /* ارتفاع کمتر برای پوشش نصف دکمه */
             margin-bottom: 15px;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
 
         .button-3d:hover .button-icon {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .button-text {
@@ -152,8 +152,8 @@
         .btn-lung:hover { background: linear-gradient(145deg, #a5d6a7, #c8e6c9); }
         .btn-cholesterol:hover { background: linear-gradient(145deg, #ffcc80, #ffb74d); }
 
-        /* استایل انیمیشن‌ها */
-        .animation-overlay {
+        /* استایل لودینگ */
+        .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -166,72 +166,44 @@
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .animation-overlay.active {
+        .loading-overlay.active {
             opacity: 1;
             visibility: visible;
         }
 
-        .animation-content {
+        .loading-content {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 20px;
-            max-width: 500px;
+            max-width: 300px;
             width: 90%;
             text-align: center;
             position: relative;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
-        .close-animation {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #ff4757;
-            color: white;
-            width: 35px;
-            height: 35px;
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            margin: 20px auto;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s;
+            animation: spin 1s linear infinite;
         }
 
-        .close-animation:hover {
-            transform: scale(1.1);
-            background: #ff3742;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .animation-icon {
-            font-size: 90px;
-            margin: 20px 0;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .animation-title {
+        .loading-text {
             color: #764ba2;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .animation-description {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-align: justify;
+            font-size: 20px;
+            font-weight: bold;
         }
 
         /* استایل بخش توضیحات */
@@ -270,7 +242,7 @@
             z-index: 1001;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
         .image-overlay.active {
@@ -310,6 +282,12 @@
             font-weight: bold;
             font-size: 18px;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+        }
+
+        .image-close:hover {
+            transform: scale(1.1);
+            background: #ff3742;
         }
 
         @media (max-width: 768px) {
@@ -333,8 +311,8 @@
             }
             
             .button-icon {
-                width: 60px;
-                height: 60px;
+                width: 110px;
+                height: 80px;
                 margin-bottom: 12px;
             }
             
@@ -342,16 +320,17 @@
                 font-size: 14px;
             }
             
-            .animation-icon {
-                font-size: 70px;
-            }
-            
-            .animation-content {
+            .loading-content {
                 padding: 20px;
             }
             
-            .animation-title {
-                font-size: 20px;
+            .loading-spinner {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .loading-text {
+                font-size: 18px;
             }
             
             .platform-description {
@@ -381,8 +360,8 @@
             }
             
             .button-icon {
-                width: 50px;
-                height: 50px;
+                width: 90px;
+                height: 70px;
                 margin-bottom: 0;
                 margin-left: 10px;
             }
@@ -400,13 +379,11 @@
     </style>
 </head>
 <body>
-    <!-- انیمیشن overlay -->
-    <div class="animation-overlay" id="animationOverlay">
-        <div class="animation-content">
-            <div class="close-animation" onclick="closeAnimation()">✕</div>
-            <div class="animation-icon" id="animationIcon">❤️</div>
-            <h3 class="animation-title" id="animationTitle">عنوان انیمیشن</h3>
-            <p class="animation-description" id="animationDescription">توضیحات مربوط به انیمیشن اینجا نمایش داده می‌شود.</p>
+    <!-- لودینگ overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">در حال بارگذاری...</p>
         </div>
     </div>
 
@@ -422,39 +399,39 @@
         <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
         
         <div class="buttons-grid">
-            <a href="hj.html" class="button-3d btn-cholesterol" onclick="showAnimation('چربی خون', '🩸', 'انیمیشن مربوط به چربی خون در حال نمایش است. اطلاعات جامعی درباره کنترل و درمان چربی خون ارائه خواهد شد.')">
-                <img src="m1.png" class="button-icon" alt="چربی خون" onclick="event.preventDefault(); showImage('m.jpg')">
+            <a href="m.html" class="button-3d btn-cholesterol" onclick="showLoading(event)">
+                <img src="m.jpg" class="button-icon" alt="چربی خون" onclick="event.stopPropagation(); showImage('m.jpg')">
                 <span class="button-text">دکمه چربی خون</span>
             </a>
-            <a href="g.html" class="button-3d btn-sugar" onclick="showAnimation('قند خون', '🍯', 'انیمیشن مربوط به قند خون در حال نمایش است. راهکارهای کنترل و مدیریت دیابت ارائه خواهد شد.')">
-                <img src="m2.jpg" class="button-icon" alt="قند خون" onclick="event.preventDefault(); showImage('m.jpg')">
+            <a href="m.html" class="button-3d btn-sugar" onclick="showLoading(event)">
+                <img src="m.jpg" class="button-icon" alt="قند خون" onclick="event.stopPropagation(); showImage('m.jpg')">
                 <span class="button-text">دکمه قند خون</span>
             </a>
             
-            <a href="k.html" class="button-3d btn-liver" onclick="showAnimation('کبد چرب', '🫘', 'انیمیشن مربوط به کبد چرب در حال نمایش است. روش‌های پیشگیری و درمان کبد چرب ارائه خواهد شد.')">
-                <img src="m3.webp" class="button-icon" alt="کبد چرب" onclick="event.preventDefault(); showImage('m.jpg')">
+            <a href="m.html" class="button-3d btn-liver" onclick="showLoading(event)">
+                <img src="m.jpg" class="button-icon" alt="کبد چرب" onclick="event.stopPropagation(); showImage('m.jpg')">
                 <span class="button-text">دکمه کبد چرب</span>
             </a>
-            <a href="f.html" class="button-3d btn-pressure" onclick="showAnimation('فشار خون', '💓', 'انیمیشن مربوط به فشار خون در حال نمایش است. راهکارهای کنترل فشار خون ارائه خواهد شد.')">
-                <img src="m4.jpg" class="button-icon" alt="فشار خون" onclick="event.preventDefault(); showImage('m.jpg')">
+            <a href="m.html" class="button-3d btn-pressure" onclick="showLoading(event)">
+                <img src="m.jpg" class="button-icon" alt="فشار خون" onclick="event.stopPropagation(); showImage('m.jpg')">
                 <span class="button-text">دکمه فشار خون</span>
             </a>
             
-            <a href="gl.html" class="button-3d btn-heart" onclick="showAnimation('قلب', '❤️', 'انیمیشن مربوط به قلب در حال نمایش است. اطلاعاتی درباره سلامت قلب و عروق ارائه خواهد شد.')">
-                <img src="m5.jpg" class="button-icon" alt="قلب" onclick="event.preventDefault(); showImage('m.jpg')">
+            <a href="m.html" class="button-3d btn-heart" onclick="showLoading(event)">
+                <img src="m.jpg" class="button-icon" alt="قلب" onclick="event.stopPropagation(); showImage('m.jpg')">
                 <span class="button-text">دکمه قلب</span>
             </a>
-            <a href="m.html" class="button-3d btn-stomach" onclick="showAnimation('معده', '🍽️', 'انیمیشن مربوط به معده در حال نمایش است. راهکارهای بهبود سلامت دستگاه گوارش ارائه خواهد شد.')">
-                <img src="m6.jpg" class="button-icon" alt="معده" onclick="event.preventDefault(); showImage('m.jpg')">
+            <a href="m.html" class="button-3d btn-stomach" onclick="showLoading(event)">
+                <img src="m.jpg" class="button-icon" alt="معده" onclick="event.stopPropagation(); showImage('m.jpg')">
                 <span class="button-text">دکمه معده</span>
             </a>
             
-            <a href="r.html" class="button-3d btn-lung" onclick="showAnimation('ریه', '🌬️', 'انیمیشن مربوط به ریه در حال نمایش است. اطلاعاتی درباره سلامت دستگاه تنفسی ارائه خواهد شد.')">
-                <img src="m7.jpg" class="button-icon" alt="ریه" onclick="event.preventDefault(); showImage('m.jpg')">
+            <a href="m.html" class="button-3d btn-lung" onclick="showLoading(event)">
+                <img src="m.jpg" class="button-icon" alt="ریه" onclick="event.stopPropagation(); showImage('m.jpg')">
                 <span class="button-text">دکمه ریه</span>
             </a>
-            <a href="H.html" class="button-3d btn-obesity" onclick="showAnimation('چاقی', '⚖️', 'انیمیشن مربوط به چاقی در حال نمایش است. راهکارهای مدیریت وزن و تغذیه سالم ارائه خواهد شد.')">
-                <img src="m8.jpg" class="button-icon" alt="چاقی" onclick="event.preventDefault(); showImage('m.jpg')">
+            <a href="m.html" class="button-3d btn-obesity" onclick="showLoading(event)">
+                <img src="m.jpg" class="button-icon" alt="چاقی" onclick="event.stopPropagation(); showImage('m.jpg')">
                 <span class="button-text">دکمه چاقی</span>
             </a>
         </div>
@@ -466,17 +443,15 @@
     </div>
 
     <script>
-        // تابع برای نمایش انیمیشن
-        function showAnimation(title, icon, description) {
-            document.getElementById('animationTitle').textContent = title;
-            document.getElementById('animationIcon').textContent = icon;
-            document.getElementById('animationDescription').textContent = description;
-            document.getElementById('animationOverlay').classList.add('active');
-        }
-        
-        // تابع برای بستن انیمیشن
-        function closeAnimation() {
-            document.getElementById('animationOverlay').classList.remove('active');
+        // تابع برای نمایش لودینگ
+        function showLoading(event) {
+            event.preventDefault();
+            document.getElementById('loadingOverlay').classList.add('active');
+            
+            // هدایت به صفحه بعد از 1.5 ثانیه (نرم و روان)
+            setTimeout(function() {
+                window.location.href = 'm.html';
+            }, 1500);
         }
         
         // تابع برای نمایش عکس بزرگ
@@ -491,12 +466,6 @@
         }
         
         // بستن overlay با کلیک خارج از محتوا
-        document.getElementById('animationOverlay').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeAnimation();
-            }
-        });
-        
         document.getElementById('imageOverlay').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeImage();
