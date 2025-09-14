@@ -34,6 +34,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             z-index: 1;
+            margin-bottom: 80px; /* فضای اضافی برای نوار پایین */
         }
 
         h1 {
@@ -231,6 +232,58 @@
             font-size: 1.1em;
         }
 
+        /* نوار پایین صفحه */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+        }
+
+        .bottom-nav-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            box-shadow: 
+                5px 5px 10px rgba(0, 0, 0, 0.1),
+                -5px -5px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .bottom-nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.15),
+                -8px -8px 16px rgba(255, 255, 255, 0.9);
+            color: #667eea;
+        }
+
+        .bottom-nav-button:active {
+            transform: translateY(1px);
+            box-shadow: 
+                3px 3px 6px rgba(0, 0, 0, 0.1),
+                -3px -3px 6px rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px 15px;
@@ -279,6 +332,19 @@
             .platform-description p {
                 font-size: 1em;
             }
+            
+            .bottom-navbar {
+                padding: 12px 15px;
+            }
+            
+            .bottom-nav-button {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            
+            .nav-icon {
+                font-size: 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -310,6 +376,19 @@
             
             h1 {
                 font-size: 1.6em;
+            }
+            
+            .bottom-navbar {
+                padding: 10px 5px;
+            }
+            
+            .bottom-nav-button {
+                font-size: 11px;
+                padding: 5px 8px;
+            }
+            
+            .nav-icon {
+                font-size: 18px;
             }
         }
     </style>
@@ -370,6 +449,18 @@
         </div>
     </div>
 
+    <!-- نوار پایین صفحه -->
+    <div class="bottom-navbar">
+        <a href="#" class="bottom-nav-button">
+            <span class="nav-icon">💬</span>
+            <span>مشاوره آنلاین</span>
+        </a>
+        <a href="#" class="bottom-nav-button">
+            <span class="nav-icon">👨‍⚕️</span>
+            <span>دکترای فوق تخصص</span>
+        </a>
+    </div>
+
     <script>
         // تابع برای نمایش لودینگ
         function showLoading(event) {
@@ -381,10 +472,10 @@
             document.getElementById('loadingOverlay').classList.add('active');
             
             // اجازه می‌دهیم لینک به صورت طبیعی کار کند
-            // بعد از 1 ثانیه لودینگ مخفی می‌شود
+            // بعد از 2 ثانیه لودینگ مخفی می‌شود
             setTimeout(function() {
                 document.getElementById('loadingOverlay').classList.remove('active');
-            }, 1000);
+            }, 2000);
         }
     </script>
 </body>
