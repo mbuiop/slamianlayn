@@ -55,7 +55,7 @@
             background: linear-gradient(145deg, #ffffff, #e6e6e6);
             border: none;
             border-radius: 15px;
-            padding: 20px;
+            padding: 15px;
             font-size: 18px;
             font-weight: bold;
             color: #333;
@@ -72,7 +72,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             aspect-ratio: 1/1;
             text-decoration: none;
         }
@@ -113,11 +113,10 @@
 
         /* استایل جدید برای آیکون‌ها - بزرگتر و تمیزتر */
         .button-icon {
-            width: 140px; /* بزرگتر */
-            height: 100px; /* ارتفاع کمتر برای پوشش نصف دکمه */
-            margin-bottom: 15px;
+            width: 100%;
+            height: 70%; /* عکس نصف بالای دکمه را می‌پوشاند */
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 10px 10px 0 0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
@@ -130,7 +129,11 @@
             font-size: 16px;
             font-weight: bold;
             text-align: center;
-            margin-top: 5px;
+            height: 30%; /* متن نصف پایین دکمه را می‌پوشاند */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
         }
 
         /* رنگ‌های مختلف برای دکمه‌ها */
@@ -228,68 +231,6 @@
             font-size: 1.1em;
         }
 
-        /* استایل نمایش عکس بزرگ */
-        .image-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .image-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .image-content {
-            position: relative;
-            max-width: 120%;
-            max-height: 120%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .image-content img {
-            max-width: 120%;
-            max-height: 105vh;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .image-close {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            background: #ff4757;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s;
-        }
-
-        .image-close:hover {
-            transform: scale(1.1);
-            background: #ff3742;
-        }
-
         @media (max-width: 768px) {
             .container {
                 padding: 20px 15px;
@@ -306,14 +247,8 @@
             }
             
             .button-3d {
-                padding: 15px;
+                padding: 12px;
                 font-size: 16px;
-            }
-            
-            .button-icon {
-                width: 110px;
-                height: 80px;
-                margin-bottom: 12px;
             }
             
             .button-text {
@@ -356,20 +291,21 @@
                 aspect-ratio: 2/1;
                 flex-direction: row;
                 justify-content: flex-start;
-                padding: 15px;
+                padding: 10px;
             }
             
             .button-icon {
-                width: 90px;
-                height: 70px;
-                margin-bottom: 0;
-                margin-left: 10px;
+                width: 40%;
+                height: 100%;
+                border-radius: 10px 0 0 10px;
             }
             
             .button-text {
+                width: 60%;
+                height: 100%;
                 margin-top: 0;
-                text-align: right;
-                flex-grow: 1;
+                text-align: center;
+                padding: 5px;
             }
             
             h1 {
@@ -387,52 +323,44 @@
         </div>
     </div>
 
-    <!-- نمایش عکس بزرگ -->
-    <div class="image-overlay" id="imageOverlay">
-        <div class="image-content">
-            <div class="image-close" onclick="closeImage()">✕</div>
-            <img id="largeImage" src="" alt="تصویر بزرگ">
-        </div>
-    </div>
-
     <div class="container">
         <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
         
         <div class="buttons-grid">
-            <a href="hj.html" class="button-3d btn-cholesterol" onclick="showLoading(event)">
-                <img src="m1.png" class="button-icon" alt="چربی خون" onclick="event.stopPropagation(); showImage('m.jpg')">
-                <span class="button-text">دکمه چربی خون</span>
+            <a href="cholesterol.html" class="button-3d btn-cholesterol" onclick="showLoading(event)">
+                <img src="cholesterol.jpg" class="button-icon" alt="چربی خون">
+                <span class="button-text">چربی خون</span>
             </a>
-            <a href="g.html" class="button-3d btn-sugar" onclick="showLoading(event)">
-                <img src="m2.jpg" class="button-icon" alt="قند خون" onclick="event.stopPropagation(); showImage('m.jpg')">
-                <span class="button-text">دکمه قند خون</span>
-            </a>
-            
-            <a href="k.html" class="button-3d btn-liver" onclick="showLoading(event)">
-                <img src="m3.webp" class="button-icon" alt="کبد چرب" onclick="event.stopPropagation(); showImage('m.jpg')">
-                <span class="button-text">دکمه کبد چرب</span>
-            </a>
-            <a href="f.html" class="button-3d btn-pressure" onclick="showLoading(event)">
-                <img src="m4.jpg" class="button-icon" alt="فشار خون" onclick="event.stopPropagation(); showImage('m.jpg')">
-                <span class="button-text">دکمه فشار خون</span>
+            <a href="sugar.html" class="button-3d btn-sugar" onclick="showLoading(event)">
+                <img src="sugar.jpg" class="button-icon" alt="قند خون">
+                <span class="button-text">قند خون</span>
             </a>
             
-            <a href="gl.html" class="button-3d btn-heart" onclick="showLoading(event)">
-                <img src="m5.jpg" class="button-icon" alt="قلب" onclick="event.stopPropagation(); showImage('m.jpg')">
-                <span class="button-text">دکمه قلب</span>
+            <a href="liver.html" class="button-3d btn-liver" onclick="showLoading(event)">
+                <img src="liver.jpg" class="button-icon" alt="کبد چرب">
+                <span class="button-text">کبد چرب</span>
             </a>
-            <a href="m.html" class="button-3d btn-stomach" onclick="showLoading(event)">
-                <img src="m6.jpg" class="button-icon" alt="معده" onclick="event.stopPropagation(); showImage('m.jpg')">
-                <span class="button-text">دکمه معده</span>
+            <a href="pressure.html" class="button-3d btn-pressure" onclick="showLoading(event)">
+                <img src="pressure.jpg" class="button-icon" alt="فشار خون">
+                <span class="button-text">فشار خون</span>
             </a>
             
-            <a href="r.html" class="button-3d btn-lung" onclick="showLoading(event)">
-                <img src="m7.jpg" class="button-icon" alt="ریه" onclick="event.stopPropagation(); showImage('m.jpg')">
-                <span class="button-text">دکمه ریه</span>
+            <a href="heart.html" class="button-3d btn-heart" onclick="showLoading(event)">
+                <img src="heart.jpg" class="button-icon" alt="قلب">
+                <span class="button-text">قلب</span>
             </a>
-            <a href="H.html" class="button-3d btn-obesity" onclick="showLoading(event)">
-                <img src="m8.jpg" class="button-icon" alt="چاقی" onclick="event.stopPropagation(); showImage('m.jpg')">
-                <span class="button-text">دکمه چاقی</span>
+            <a href="stomach.html" class="button-3d btn-stomach" onclick="showLoading(event)">
+                <img src="stomach.jpg" class="button-icon" alt="معده">
+                <span class="button-text">معده</span>
+            </a>
+            
+            <a href="lung.html" class="button-3d btn-lung" onclick="showLoading(event)">
+                <img src="lung.jpg" class="button-icon" alt="ریه">
+                <span class="button-text">ریه</span>
+            </a>
+            <a href="obesity.html" class="button-3d btn-obesity" onclick="showLoading(event)">
+                <img src="obesity.jpg" class="button-icon" alt="چاقی">
+                <span class="button-text">چاقی</span>
             </a>
         </div>
         
@@ -445,32 +373,19 @@
     <script>
         // تابع برای نمایش لودینگ
         function showLoading(event) {
-            event.preventDefault();
+            // فقط اگر واقعا نیاز به لودینگ داریم نمایش دهیم
+            // در این حالت مستقیما به صفحه مورد نظر هدایت می‌شویم
+            // event.preventDefault();
+            
+            // نمایش لودینگ
             document.getElementById('loadingOverlay').classList.add('active');
             
-            // هدایت به صفحه بعد از 1.5 ثانیه (نرم و روان)
+            // اجازه می‌دهیم لینک به صورت طبیعی کار کند
+            // بعد از 1 ثانیه لودینگ مخفی می‌شود
             setTimeout(function() {
-                window.location.href = 'm.html';
-            }, 1500);
+                document.getElementById('loadingOverlay').classList.remove('active');
+            }, 1000);
         }
-        
-        // تابع برای نمایش عکس بزرگ
-        function showImage(imageSrc) {
-            document.getElementById('largeImage').src = imageSrc;
-            document.getElementById('imageOverlay').classList.add('active');
-        }
-        
-        // تابع برای بستن عکس بزرگ
-        function closeImage() {
-            document.getElementById('imageOverlay').classList.remove('active');
-        }
-        
-        // بستن overlay با کلیک خارج از محتوا
-        document.getElementById('imageOverlay').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeImage();
-            }
-        });
     </script>
 </body>
 </html>
