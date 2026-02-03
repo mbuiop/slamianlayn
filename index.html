@@ -5,37 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مرکز سلامت</title>
     <style>
-        /* استایل جدید برای دکمه دانلود */
-        .download-app-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .download-app-button {
-            display: inline-block;
-            background: linear-gradient(145deg, #4CAF50, #2E7D32);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            margin: 10px 0;
-        }
-
-        .download-app-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(145deg, #66BB6A, #388E3C);
-        }
-
-        .download-app-button:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -143,10 +112,10 @@
             left: 100%;
         }
 
-        /* استایل جدید برای آیکون‌ها - بزرگتر و تمیزتر */
+        /* استایل برای آیکون‌ها */
         .button-icon {
             width: 100%;
-            height: 70%; /* عکس نصف بالای دکمه را می‌پوشاند */
+            height: 70%;
             object-fit: cover;
             border-radius: 10px 10px 0 0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -161,7 +130,7 @@
             font-size: 16px;
             font-weight: bold;
             text-align: center;
-            height: 30%; /* متن نصف پایین دکمه را می‌پوشاند */
+            height: 30%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -224,7 +193,7 @@
             width: 60px;
             height: 60px;
             margin: 20px auto;
-            border: 5px solid #f極f3f3;
+            border: 5px solid #f3f3f3;
             border-top: 5px solid #667eea;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -434,13 +403,6 @@
     </div>
 
     <div class="container">
-        <!-- دکمه دانلود اپلیکیشن اضافه شده -->
-        <div class="download-app-container">
-            <a href="m.apk" class="download-app-button" download>
-                📲 دانلود اپلیکیشن
-            </a>
-        </div>
-        
         <h1>🏥 مرکز مشاوره سلامت 🏥</h1>
         
         <div class="buttons-grid">
@@ -471,7 +433,7 @@
                 <span class="button-text">معده</span>
             </a>
             
-            <a href="r.html" class="button-極d btn-lung" onclick="showLoading(event)">
+            <a href="r.html" class="button-3d btn-lung" onclick="showLoading(event)">
                 <img src="m7.jpg" class="button-icon" alt="ریه">
                 <span class="button-text">ریه</span>
             </a>
@@ -483,7 +445,7 @@
         
         <div class="platform-description">
             <h3>درباره پلتفرم طبع سنتی</h3>
-            <p>پلتفرم طبع سنتی با هدف ارائه خدمات مشاوره سلامت و بر اساس اصول طب سنتی طراحی شده است. در این پلتفرم، ما با استفاده از دانش کهن طب سنتی و ترکیب آن با علوم روز پزشکی، به شما کمک می‌کنیم تا سلامت خود را بهبود بخشیده و از بیماری‌ها پیشگیری کنید. رویکردنا مبتنی بر تشخیص طبع و ارائه توصیه‌های شخصی‌سازی شده برای هر فرد است.</p>
+            <p>پلتفرم طبع سنتی با هدف ارائه خدمات مشاوره سلامت و بر اساس اصول طب سنتی طراحی شده است. در این پلتفرم، ما با استفاده از دانش کهن طب سنتی و ترکیب آن با علوم روز پزشکی، به شما کمک می‌کنیم تا سلامت خود را بهبود بخشیده و از بیماری‌ها پیشگیری کنید. رویکرد ما مبتنی بر تشخیص طبع و ارائه توصیه‌های شخصی‌سازی شده برای هر فرد است.</p>
         </div>
     </div>
 
@@ -506,14 +468,9 @@
     <script>
         // تابع برای نمایش لودینگ
         function showLoading(event) {
-            // فقط اگر واقعا نیاز به لودینگ داریم نمایش دهیم
-            // در این حالت مستقیما به صفحه مورد نظر هدایت می‌شویم
-            // event.preventDefault();
-            
             // نمایش لودینگ
             document.getElementById('loadingOverlay').classList.add('active');
             
-            // اجازه می‌دهیم لینک به صورت طبیعی کار کند
             // بعد از 2 ثانیه لودینگ مخفی می‌شود
             setTimeout(function() {
                 document.getElementById('loadingOverlay').classList.remove('active');
